@@ -1,6 +1,6 @@
 const express = require("express");
 const { authenticateToken } = require("../common/jwt");
-const { auth, recipies } = require("./constrollers");
+const { auth, recipies } = require("./admin.constrollers");
 
 const router = express.Router();
 

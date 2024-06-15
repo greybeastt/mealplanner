@@ -9,7 +9,7 @@ const cors = require("cors");
 
 // const Recipe = require("./src/model/receipe.model");
 const logger = require("./src/common/logger");
-const adminRoute = require("./src/admin/routes");
+const adminRoute = require("./src/admin/admin.routes");
 
 app.disable("x-powered-by");
 
@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "public", "auth.html"));
 });
 app.get("/ping", (req, res) => res.status(200));
 

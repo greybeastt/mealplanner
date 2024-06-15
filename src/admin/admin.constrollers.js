@@ -1,5 +1,5 @@
-const { generateAccessToken } = require("../common/jwt");
-const logger = require("../common/logger");
+const { generateAccessToken } = require("../common/jwt.js");
+const logger = require("../common/logger.js");
 const Recipe = require("../model/receipe.model.js");
 
 exports.auth = (req, res, next) => {
