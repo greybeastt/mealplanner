@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="res.css" />
+  </head>
+  <body>
+    <div class="row">
+      <div class="col-10 search_padding results_view">
+        <div class="row food_table_header_right">
+          <div class="col-11">
+            <div class="row">
+              <div class="col-1 food_table_column_header">Image</div>
+
+              <div class="col-3 food_table_column_header">Title</div>
+
+              <div class="col-8">
+                <div class="row">
+                  <div class="col-1"></div>
+                  <a
+                    href="/food/browse/?type=recipe&amp;order_by=-calories"
+                    class="col-2 food_table_column_header sort_nutrient_link"
+                  >
+                    Calories
+
+                    <div class="hidden_arrow light_icon">
+                      <i class="fa fa-chevron-down"></i>
+                    </div>
+                  </a>
+
+                  <a
+                    href="/food/browse/?type=recipe&amp;order_by=-carbs"
+                    class="col-2 food_table_column_header sort_nutrient_link"
+                  >
+                    Carbs
+
+                    <div class="hidden_arrow light_icon">
+                      <i class="fa fa-chevron-down"></i>
+                    </div>
+                  </a>
+
+                  <a
+                    href="/food/browse/?type=recipe&amp;order_by=-fats"
+                    class="col-2 food_table_column_header sort_nutrient_link"
+                  >
+                    Fat
+
+                    <div class="hidden_arrow light_icon">
+                      <i class="fa fa-chevron-down"></i>
+                    </div>
+                  </a>
+
+                  <a
+                    href="/food/browse/?type=\recipe&amp;order_by=-proteins"
+                    class="col-2 food_table_column_header sort_nutrient_link"
+                  >
+                    Protein
+
+                    <div class="hidden_arrow light_icon">
+                      <i class="fa fa-chevron-down"></i>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row food_result">
+          <div class="col-11" style="">
+            <a
+              class="row"
+              href="/recipe/nutrition/peanut-butter-and-jelly,33486/"
+            >
+              <div class="search_result_image col-1">
+                <img
+                  src="https://images.eatthismuch.com/thmb/33486_elm333_8f2148fe-e6b1-4935-abd5-994a45fce7ae.jpg"
+                />
+              </div>
+              <div class="result_name col-3">Peanut butter and jelly</div>
+              <div class="col-8">
+                <div class="row result_stats">
+                  <div class="col-2 offset-1 nutrient_cell">371</div>
+                  <div class="col-2 nutrient_cell">41.7 g</div>
+                  <div class="col-2 nutrient_cell">18.4 g</div>
+                  <div class="col-2 nutrient_cell">12.4 g</div>
+                  <div class="col-3 nutrient_cell">5.3 g</div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- <div class="bottom_pagination search_padding">
+          <div class="inline_block">
+            Results <strong>1 - 20</strong> out of 1000+
+          </div>
+          <div class="inline_block" style="margin-left: 20px">
+            <span class="current"> Page 1 of 50+ </span>
+
+            <a
+              class="change_page"
+              href="/food/browse/?type=recipe&amp;page=2"
+              data-page="2"
+              ><i class="fa fa-chevron-right"></i
+            ></a>
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+    <script src="./res.js"></script>
+  </body>
+</html>
