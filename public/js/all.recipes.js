@@ -9,14 +9,14 @@ paginationNumbers.textContent = `page ${pageNumber}`;
 const load_next_page = () => {
   pageNumber += 1;
   recipeElement.replaceChildren();
-  paginationNumbers.append(`page ${pageNumber}`);
+  paginationNumbers.textContent = `page ${pageNumber}`;
   fetchdata();
 };
 
 const load_prev_page = () => {
   pageNumber -= 1;
   recipeElement.replaceChildren();
-  paginationNumbers.append(`page ${pageNumber}`);
+  paginationNumbers.textContent = `page ${pageNumber}`;
   fetchdata();
 };
 
