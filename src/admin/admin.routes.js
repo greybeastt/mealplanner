@@ -9,6 +9,6 @@ router.post("/auth", auth);
 
 // get all
 router.get("/recipies");
-router.route("/recipies").all().get(recipies).post().delete();
+router.route("/recipies").all(authenticateToken).get(recipies).post().delete();
 
 module.exports = router

@@ -18,10 +18,11 @@ exports.authenticateToken = (req, res, next) => {
 
   jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
     if (err) {
-      logger.error("jwt error: " + err);
+      logger.error(err);
       res.sendStatus(403).end();
       return;
     }
+    logger.info("valid token");
     req.user = user._id;
 
     next();

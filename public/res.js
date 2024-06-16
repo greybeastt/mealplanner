@@ -1,57 +1,64 @@
-fetch("/admin/recipies") // Replace with your API endpoint
-  .then((response) => response.json())
-  .then((data) => {
-    // Process the data and display recipes (see next step)
-    console.log(data[0]);
-    data.map((recipe) => {
-      const recipeElement = document.createElement("div");
-      recipeElement.classList.add("row", "food_result");
+const fetchdata = async () => {
+  const options = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+  const response = await fetch("/admin/recipies", options); // Replace with your API endpoint
 
-      const innerCol = document.createElement("div");
-      innerCol.classList.add("col-11");
+  if (!response.ok) {
+    window.location.replace("/");
+    return;
+  }
+  const data = await response.json();
+  data.map((recipe) => {
+    const recipeElement = document.createElement("div");
+    recipeElement.classList.add("row", "food_result");
 
-      const recipeLink = document.createElement("a");
-      recipeLink.classList.add("row");
-      recipeLink.href = ``; // Replace with your link format
+    const innerCol = document.createElement("div");
+    innerCol.classList.add("col-11");
 
-      const imageCol = document.createElement("div");
-      imageCol.classList.add("search_result_image", "col-1");
-      const image = document.createElement("img");
-      image.width = "100";
-      image.height = "100";
-      image.src =
-        "https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg"; // Replace with your image property name
-      imageCol.appendChild(image);
+    const recipeLink = document.createElement("a");
+    recipeLink.classList.add("row");
+    recipeLink.href = ``; // TODO: replace with reciepe url
 
-      const recipeName = document.createElement("div");
-      recipeName.classList.add("result_name", "col-3");
-      recipeName.textContent = recipe.food_name;
+    const imageCol = document.createElement("div");
+    imageCol.classList.add("search_result_image", "col-1");
+    const image = document.createElement("img");
+    image.width = "100";
+    image.height = "100";
+    // TODO: fix Images issue
+    image.src =
+      "https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg"; // Replace with your image property name
+    imageCol.appendChild(image);
 
-      const statsCol = document.createElement("div");
-      statsCol.classList.add("col-8");
+    const recipeName = document.createElement("div");
+    recipeName.classList.add("result_name", "col-3");
+    recipeName.textContent = recipe.food_name;
 
-      const statsRow = document.createElement("div");
-      statsRow.classList.add("row", "result_stats");
+    const statsCol = document.createElement("div");
+    statsCol.classList.add("col-8");
 
-      ["calories", "fats", "protiens"].forEach((nutrient) => {
-        console.log(recipe[nutrient]);
-        const nutrientCell = document.createElement("div");
-        nutrientCell.classList.add("col-2", "offset-1", "nutrient_cell");
-        nutrientCell.textContent = recipe[nutrient] || 0; // Replace with your nutrient value property name
-        statsRow.appendChild(nutrientCell);
-      });
+    const statsRow = document.createElement("div");
+    statsRow.classList.add("row", "result_stats");
 
-      statsCol.appendChild(statsRow);
-
-      recipeLink.appendChild(imageCol);
-      recipeLink.appendChild(recipeName);
-      recipeLink.appendChild(statsCol);
-
-      innerCol.appendChild(recipeLink);
-      recipeElement.appendChild(innerCol);
-
-      // Add the recipe element to the container
-      document.querySelector(".results_view").appendChild(recipeElement);
+    ["calories", "fats", "protiens"].forEach((nutrient) => {
+      const nutrientCell = document.createElement("div");
+      nutrientCell.classList.add("col-2", "offset-1", "nutrient_cell");
+      nutrientCell.textContent = recipe[nutrient] || 0;
+      statsRow.appendChild(nutrientCell);
     });
-  })
-  .catch((error) => console.error(error));
+
+    statsCol.appendChild(statsRow);
+    recipeLink.appendChild(imageCol);
+    recipeLink.appendChild(recipeName);
+    recipeLink.appendChild(statsCol);
+
+    innerCol.appendChild(recipeLink);
+    recipeElement.appendChild(innerCol);
+
+    document.querySelector(".results_view").appendChild(recipeElement);
+  });
+};
+
+fetchdata();
