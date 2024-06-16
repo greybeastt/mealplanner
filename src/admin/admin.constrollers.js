@@ -1,6 +1,8 @@
+const { generateRecipeHtml } = require("../common/generateHtml.js");
 const { generateAccessToken } = require("../common/jwt.js");
 const logger = require("../common/logger.js");
 const Recipe = require("../model/receipe.model.js");
+const paginationLimit = 20;
 
 exports.auth = (req, res, next) => {
   const { username, password } = req.body;
@@ -22,8 +24,8 @@ exports.auth = (req, res, next) => {
 exports.recipies = async (req, res, next) => {
   const receipes = await Recipe.find(
     {},
-    { images: 1, food_name: 1, calories: 1, fats: 1, proteins: 1, meal_id: 1 }
-  ).limit(100);
+    { images: 1, food_name: 1, calories: 1, fats: 1, proteins: 1, _id: 1 }
+  ).limit(paginationLimit);
   res.status(200).json(receipes);
 };
 
@@ -37,22 +39,10 @@ exports.getRecipe = async (req, res, next) => {
   }
 };
 
-exports.createview = (req, res, next) => {
+exports.createview = async (req, res, next) => {
   const recipieID = req.params.recipeID;
-  res.send(`
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="recipeID" style="display: none">${recipieID}</div>
-  </body>
-  <script src="/js/recipe.js"></script>
-</html>
-`);
+  const recipe = await Recipe.findById(recipieID);
+  res.send(generateRecipeHtml(recipe));
 };
 
 ("https://images.eatthismuch.com/img/343641_simmyras_0e578df1-000f-43b9-8f46-3d822371ca00.png");

@@ -21,7 +21,7 @@ const fetchdata = async () => {
 
     const recipeLink = document.createElement("a");
     recipeLink.classList.add("row");
-    recipeLink.href = ``; // TODO: replace with reciepe url
+    recipeLink.href = `/admin/recipe/view/${recipe["_id"]}`; // TODO: replace with reciepe url
 
     const imageCol = document.createElement("div");
     imageCol.classList.add("search_result_image", "col-1");

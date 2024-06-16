@@ -1,13 +1,10 @@
-function generateRecipeHtml(recipeData) {
-  // Implement logic to create HTML content using recipe data (sanitize output)
-  // Example:
-  const title = recipeData.title;
+exports.generateRecipeHtml = (recipeData) => {
+  const title = recipeData.food_name;
   const ingredients = recipeData.ingredients
-    .map((ingredient) => `<li>${ingredient}</li>`)
+    .map((ingredient) => `<li>${ingredient.food.food_name}</li>`)
     .join("");
-  const instructions = recipeData.instructions
-    .split("\n")
-    .map((step) => `<p>${step}</p>`)
+  const instructions = recipeData.directions
+    .map((step) => `<p>${step.text}</p>`)
     .join("");
   return `
     <!DOCTYPE html>
@@ -27,4 +24,4 @@ function generateRecipeHtml(recipeData) {
       </body>
     </html>
   `;
-}
+};
