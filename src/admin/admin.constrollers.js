@@ -22,7 +22,7 @@ exports.auth = (req, res, next) => {
 exports.recipies = async (req, res, next) => {
   const receipes = await Recipe.find(
     {},
-    { images: 1, food_name: 1, calories: 1, fats: 1, proteins: 1, _id: 1 }
+    { images: 1, food_name: 1, calories: 1, fats: 1, proteins: 1, meal_id: 1 }
   ).limit(100);
   res.status(200).json(receipes);
 };
