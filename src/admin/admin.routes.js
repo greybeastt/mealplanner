@@ -1,6 +1,11 @@
 const express = require("express");
 const { authenticateToken } = require("../common/jwt");
-const { auth, recipies, getRecipe, createview } = require("./admin.constrollers");
+const {
+  auth,
+  recipies,
+  getRecipe,
+  createview,
+} = require("./admin.constrollers");
 
 const router = express.Router();
 

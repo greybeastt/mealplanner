@@ -22,7 +22,6 @@ exports.authenticateToken = (req, res, next) => {
       res.sendStatus(403).end();
       return;
     }
-    logger.info("valid token");
     req.user = user._id;
 
     next();

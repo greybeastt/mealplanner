@@ -1,19 +1,39 @@
+const recipeElement = document.createElement("div");
+const paginationNumbers = document.getElementById("pagination-numbers");
+const nextButton = document.getElementById("next-button");
+const prevButton = document.getElementById("prev-button");
+
+let pageNumber = 1;
+paginationNumbers.textContent = `page ${pageNumber}`;
+
+const load_next_page = () => {
+  pageNumber += 1;
+  recipeElement.replaceChildren();
+  paginationNumbers.append(`page ${pageNumber}`);
+  fetchdata();
+};
+
+const load_prev_page = () => {
+  pageNumber -= 1;
+  recipeElement.replaceChildren();
+  paginationNumbers.append(`page ${pageNumber}`);
+  fetchdata();
+};
+
 const fetchdata = async () => {
   const options = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("token"),
     },
   };
-  const response = await fetch("/admin/recipies", options); // Replace with your API endpoint
+  const response = await fetch(`/admin/recipies?page=${pageNumber}`, options); // Replace with your API endpoint
 
   if (!response.ok) {
     window.location.replace("/");
     return;
   }
   const data = await response.json();
-  console.log(data[0]);
   data.map((recipe) => {
-    const recipeElement = document.createElement("div");
     recipeElement.classList.add("row", "food_result");
 
     const innerCol = document.createElement("div");
@@ -39,7 +59,6 @@ const fetchdata = async () => {
       }
     } catch (err) {
       console.error(err);
-      console.log(recipe);
     }
     imageCol.appendChild(image);
 
@@ -52,9 +71,7 @@ const fetchdata = async () => {
 
     const statsRow = document.createElement("div");
     statsRow.classList.add("row", "result_stats");
-    console.log();
     ["calories", "fats", "protiens"].forEach((nutrient) => {
-      console.log(recipe[nutrient]);
       const nutrientCell = document.createElement("div");
       nutrientCell.classList.add("col-2", "offset-1", "nutrient_cell");
       nutrientCell.textContent = Math.round(recipe[nutrient] * 10) / 10 || 0;
@@ -74,3 +91,5 @@ const fetchdata = async () => {
 };
 
 fetchdata();
+nextButton.addEventListener("click", load_next_page);
+prevButton.addEventListener("click", load_prev_page);

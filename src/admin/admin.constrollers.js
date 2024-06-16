@@ -6,26 +6,25 @@ const paginationLimit = 20;
 
 exports.auth = (req, res, next) => {
   const { username, password } = req.body;
-  // Handle authentication logic here
-  console.log("Username:", username);
-  console.log("Password:", password);
 
-  // Respond to the client
   if (username === process.env.USER_NAME && password === process.env.PASSWORD) {
     // '120s'
     const token = generateAccessToken({}, process.env.TOKEN_SECRET, "1d");
-    res.json({ message: "Login successful", token: token });
-  } else {
-    res.status(401).json({ message: "Login failed" });
+    return res.json({ message: "Login successful", token: token });
   }
+  return res.status(401).json({ message: "Login failed" });
 };
 
 //  Image Title Calories Carbs Fat Protein
 exports.recipies = async (req, res, next) => {
+  const { page } = req.query || 1;
   const receipes = await Recipe.find(
     {},
     { images: 1, food_name: 1, calories: 1, fats: 1, proteins: 1, _id: 1 }
-  ).limit(paginationLimit);
+  )
+    .limit(paginationLimit)
+    .skip(Math.max(page - 1, 0) * paginationLimit);
+
   res.status(200).json(receipes);
 };
 
@@ -44,6 +43,3 @@ exports.createview = async (req, res, next) => {
   const recipe = await Recipe.findById(recipieID);
   res.send(generateRecipeHtml(recipe));
 };
-
-("https://images.eatthismuch.com/img/343641_simmyras_0e578df1-000f-43b9-8f46-3d822371ca00.png");
-("https://images.eatthismuch.com/img/343641_simmyras_0e57…9-8f46-3d822371ca00.png");
