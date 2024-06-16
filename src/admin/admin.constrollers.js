@@ -22,9 +22,37 @@ exports.auth = (req, res, next) => {
 exports.recipies = async (req, res, next) => {
   const receipes = await Recipe.find(
     {},
-    // { food_name: 1, calories: 1, fats: 1, proteins: 1 }
-  ).limit(5);
+    { images: 1, food_name: 1, calories: 1, fats: 1, proteins: 1, _id: 1 }
+  ).limit(100);
   res.status(200).json(receipes);
+};
+
+exports.getRecipe = async (req, res, next) => {
+  const recipieID = req.params.recipeID;
+  try {
+    const reciepe = await Recipe.findById(recipieID);
+    res.status(200).send(reciepe);
+  } catch (err) {
+    res.status(404).send({ error: "reciep not found" });
+  }
+};
+
+exports.createview = (req, res, next) => {
+  const recipieID = req.params.recipeID;
+  res.send(`
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="recipeID" style="display: none">${recipieID}</div>
+  </body>
+  <script src="/js/recipe.js"></script>
+</html>
+`);
 };
 
 ("https://images.eatthismuch.com/img/343641_simmyras_0e578df1-000f-43b9-8f46-3d822371ca00.png");

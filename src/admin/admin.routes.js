@@ -1,6 +1,6 @@
 const express = require("express");
 const { authenticateToken } = require("../common/jwt");
-const { auth, recipies } = require("./admin.constrollers");
+const { auth, recipies, getRecipe, createview } = require("./admin.constrollers");
 
 const router = express.Router();
 
@@ -9,6 +9,9 @@ router.post("/auth", auth);
 
 // get all
 router.get("/recipies");
-router.route("/recipies").all(authenticateToken).get(recipies).post().delete();
+router.get("/recipies", authenticateToken, recipies);
 
-module.exports = router
+router.route("/recipe/view/:recipeID").all().get(createview);
+router.route("/recipe/:recipeID").all().get(getRecipe);
+
+module.exports = router;

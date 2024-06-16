@@ -2,9 +2,10 @@
 
 ## TODO
 
-1. [ ] browse all meals
+1. [x] jwt auth
+2. [ ] browse all meals
    - [ ] pagination
-2. [ ] each meal
+3. [ ] each meal
    - [ ] get
    - [ ] update
    - [ ] delete

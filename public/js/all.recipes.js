@@ -28,8 +28,18 @@ const fetchdata = async () => {
     image.width = "100";
     image.height = "100";
     // TODO: fix Images issue
-    image.src =
-      "https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg"; // Replace with your image property name
+    try {
+      if (recipe["images"].length > 0) {
+        image.src =
+          "https://images.eatthismuch.com/" + recipe["images"][0]["thumbnail"];
+      } else {
+        image.src =
+          "https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg"; 
+      }
+    } catch (err) {
+      console.error(err);
+      console.log(recipe);
+    }
     imageCol.appendChild(image);
 
     const recipeName = document.createElement("div");
@@ -41,8 +51,9 @@ const fetchdata = async () => {
 
     const statsRow = document.createElement("div");
     statsRow.classList.add("row", "result_stats");
-
-    ["calories", "fats", "protiens"].forEach((nutrient) => {
+    console.log();
+    [("calories", "fats", "protiens")].forEach((nutrient) => {
+      console.log(recipe[nutrient]);
       const nutrientCell = document.createElement("div");
       nutrientCell.classList.add("col-2", "offset-1", "nutrient_cell");
       nutrientCell.textContent = recipe[nutrient] || 0;
