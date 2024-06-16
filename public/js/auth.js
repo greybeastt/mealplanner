@@ -1,5 +1,3 @@
-document.getElementById("login-form").addEventListener("submit", login);
-
 const login = async (event) => {
   event.preventDefault(); // Prevent the default form submission
 
@@ -10,14 +8,16 @@ const login = async (event) => {
     username: formData.get("username"),
     password: formData.get("password"),
   };
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  };
   try {
-    const response = await fetch("/admin/auth", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    const response = await fetch("/admin/auth", options);
 
     if (!response.ok) {
       const error = await response.json();
@@ -40,3 +40,5 @@ const login = async (event) => {
     alert("Network error occurred.");
   }
 };
+
+document.getElementById("login-form").addEventListener("submit", login);
