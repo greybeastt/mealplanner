@@ -1,5 +1,6 @@
 exports.generateRecipeHtml = (recipeData) => {
-  const { food_name, ingredients, directions, default_image } = recipeData;
+  const { food_name, ingredients, directions, default_image, nutrition } =
+    recipeData;
   const ingredientsHTML = ingredients
     .map((ingredient) => `<li>${ingredient.food.food_name}</li>`)
     .join("");
@@ -21,11 +22,16 @@ exports.generateRecipeHtml = (recipeData) => {
     <dev class="container">
       <div class="row">
         <h1>${food_name}</h1>
-        <img src="https://images.eatthismuch.com/${default_image.image}" width="200" />
+        <img src="https://images.eatthismuch.com/${
+          default_image.image
+        }" width="200" />
       </div>
       <h2>Ingredients</h2>
       <ul>
         ${ingredientsHTML}
+      </ul>
+      <ul>
+        ${JSON.stringify(nutrition)}
       </ul>
       <h2>Instructions</h2>
       <div>${directionsHTML}</div>

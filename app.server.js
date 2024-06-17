@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 // const Recipe = require("./src/model/receipe.model");
-const logger = require("./src/common/logger");
+const logger = require("./src/utils/logger");
 const adminRoute = require("./src/admin/admin.routes");
 
 app.disable("x-powered-by");

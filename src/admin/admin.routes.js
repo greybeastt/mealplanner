@@ -1,5 +1,5 @@
 const express = require("express");
-const { authenticateToken } = require("../common/jwt");
+const { authenticateToken } = require("../utils/jwt");
 const {
   auth,
   recipies,

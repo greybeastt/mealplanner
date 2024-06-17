@@ -1,6 +1,6 @@
-const { generateRecipeHtml } = require("../common/generateHtml.js");
-const { generateAccessToken } = require("../common/jwt.js");
-const logger = require("../common/logger.js");
+const { generateRecipeHtml } = require("../utils/generateHtml.js");
+const { generateAccessToken } = require("../utils/jwt.js");
+const logger = require("../utils/logger.js");
 const Recipe = require("../model/receipe.model.js");
 const paginationLimit = 20;
 

@@ -3,7 +3,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 
 const server = require("./app.server");
-const logger = require("./src/common/logger");
+const logger = require("./src/utils/logger");
 
 const port = process.env.PORT || 3000;
 
