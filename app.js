@@ -1,4 +1,5 @@
 require("dotenv").config();
+const config = require("config");
 
 const mongoose = require("mongoose");
 
@@ -8,7 +9,7 @@ const logger = require("./src/utils/logger");
 const port = process.env.PORT || 3000;
 
 mongoose
-  .connect(process.env.MONGO_URI, {
+  .connect(config.get("MONGO_URI"), {
     dbName: "eatthismuch",
   })
   .then((result) => {

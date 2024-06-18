@@ -10,6 +10,7 @@ const cors = require("cors");
 // const Recipe = require("./src/model/receipe.model");
 const logger = require("./src/utils/logger");
 const adminRoute = require("./src/admin/admin.routes");
+const userRoute = require("./src/user/user.routes");
 
 app.disable("x-powered-by");
 
@@ -22,9 +23,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "auth.html"));
 });
+
 app.get("/ping", (req, res) => res.status(200));
 
 app.use("/admin", adminRoute);
+app.use("/api/v1", userRoute);
 
 app.use((err, req, res, next) => {
   logger.error(err);

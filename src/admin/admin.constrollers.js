@@ -9,7 +9,7 @@ exports.auth = (req, res, next) => {
 
   if (username === process.env.USER_NAME && password === process.env.PASSWORD) {
     // '120s'
-    const token = generateAccessToken({}, process.env.TOKEN_SECRET, "1d");
+    const token = generateAccessToken({}, "1d");
     return res.json({ message: "Login successful", token: token });
   }
   return res.status(401).json({ message: "Login failed" });
