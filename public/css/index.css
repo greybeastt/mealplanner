@@ -427,7 +427,8 @@ html [type="button"] {
   border-color: rgba(255, 255, 255, 0.1);
 }
 #top_nav {
-  z-index: 1000;
+  /* z-index: 1000; */
+  height: 80px;
 }
 
 /*! CSS Used from: https://www.eatthismuch.com/static_files/css_libs1.0.2636.css */
@@ -1073,4 +1074,12 @@ h4 {
 }
 .etm-icon:hover {
   cursor: pointer;
+}
+
+/* grey defines */
+body {
+  background-image: url("https://www.eatthismuch.com/static_files/images/landing-background-tomato2-horizontal.webp");
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 100vh;
 }

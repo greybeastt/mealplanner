@@ -1,17 +1,190 @@
-.container {
-  color: #212529;
-  text-align: left;
-  box-sizing: border-box;
+body {
   margin: 0;
-  padding: 0;
-  border: 0;
-  vertical-align: baseline;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+.container {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  padding: 20px;
+  margin: 0px 10px;
+}
+
+.navbar {
+  display: flex; /* Use flexbox for layout */
+  justify-content: start; /* Distribute items evenly */
+  align-items: center; /* Center items vertically */
+  background-color: whitesmoke; /* Background color for navbar */
+  color: black; /* Text color */
+  height: 50px; /* Adjust height as needed */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow */
+  margin-bottom: 10px;
+  padding: 5px;
+  border-bottom: 2px solid #cccccc9c; /* Border style with color */
+}
+
+.navbar a {
+  margin: 0;
+  text-decoration: none; /* Remove underline from links */
+  color: inherit; /* Inherit text color */
+  font-size: 20px;
+}
+
+.navbar a:hover {
+  background-color: whitesmoke; /* Darken background on hover */
+}
+
+.header {
+  position: relative; /* Position relative to allow absolute positioning of overlay text */
+  margin: 0px 10px;
+}
+
+.header img {
+  border-radius: 1px;
+  width: 100%; /* Ensure the image fills the entire width of its parent container */
+  display: block; /* Ensure the image behaves as a block-level element */
+  object-fit: cover;
+  height: 200px; /* Maintain aspect ratio */
+}
+
+.stats-card {
+  background-color: #e0e0e0; /* Updated grey color */
+  border-radius: 5px;
+  padding: 20px;
+  margin-right: 10px;
+  flex: 1;
+  display: flex; /* Display children horizontally */
+  justify-content: space-around; /* Spreads items horizontally */
+  max-width: 70%;
+}
+
+.time-item {
+  text-align: center; /* Center align content */
+}
+
+.time-item h4 {
+  margin: 0;
+}
+
+.time-item p {
+  margin: 0;
+  color: slategrey;
+}
+
+.container-wrapper {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.nutrition-facts {
+  border: 1px solid #ddd;
+  padding: 10px;
+  height: fit-content;
+  width: 20%;
+}
+
+.nutrition-facts h2 {
+  text-align: center;
+}
+
+.nutrition-facts table {
   width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-  max-width: 960px;
-  margin-top: 20px;
-  background-color: red;
+  margin: 10px 0;
+}
+
+.nutrition-facts table td {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+.left-part {
+  flex: 1;
+}
+
+.edit-delete-buttons {
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  align-items: center; /* Center buttons horizontally */
+}
+
+.edit-delete-buttons button {
+  margin: 10px 0; /* Add margin above and below each button */
+}
+
+.bluebtn {
+  background-color: navy;
+  color: white;
+  padding: 10px 20px; /* Add horizontal padding for a better look */
+  font-size: 16px;
+  font-weight: bold;
+  min-width: 40%;
+  border-radius: 10px;
+  border: 0;
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.redbtn {
+  background-color: darkred;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px; /* Add horizontal padding for a better look */
+  border-radius: 10px;
+  border: 0;
+  min-width: 40%;
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* Optional: Add hover effects for buttons */
+.bluebtn:hover {
+  background-color: darkblue; /* Slightly darker shade on hover */
+}
+
+.redbtn:hover {
+  background-color: darkred; /* Slightly darker shade on hover */
+}
+
+
+/* Media Queries */
+@media (max-width: 1024px) {
+  .container-wrapper {
+    flex-direction: column; /* Stack elements vertically on medium screens */
+  }
+  .nutrition-facts {
+    width: 100%;
+    margin-top: 20px; /* Add space between stacked elements */
+  }
+}
+
+@media (max-width: 768px) {
+  .header img {
+    height: 150px; /* Adjust image height for smaller screens */
+  }
+  .stats-card {
+    flex-direction: column; /* Stack time items vertically */
+    align-items: center;
+  }
+  .stats-card .time-item {
+    margin-bottom: 10px; /* Add space between time items */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px; /* Reduce padding on smaller screens */
+  }
+  .navbar {
+    flex-direction: column; /* Stack navbar items vertically */
+    height: auto; /* Adjust height */
+  }
+  .navbar a {
+    font-size: 16px; /* Adjust font size */
+  }
+  .header img {
+    height: 120px; /* Further adjust image height */
+  }
+  .nutrition-facts {
+    width: 100%; /* Full width for smaller screens */
+  }
 }
