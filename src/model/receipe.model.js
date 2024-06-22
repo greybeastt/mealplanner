@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const schema = new Schema(
   {
     food_name: String,
+    is_lunch: Boolean,
   },
   { strict: false }
 );
