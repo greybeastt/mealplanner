@@ -1,0 +1,139 @@
+
+
+.container-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.left-part {
+  flex: 2;
+}
+
+.stats-card {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.time-item h4 {
+  margin: 0;
+  font-size: 18px;
+  color: #555;
+}
+
+.time-item input {
+  width: 100px;
+  padding: 5px;
+}
+
+h2 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Ingredient and Direction Styles */
+#ingredients-list,
+#directions-list {
+  margin-bottom: 20px;
+}
+
+.ingredient-item,
+.direction-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ingredient-item input,
+.direction-item textarea {
+  width: 100%;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button[type="button"] {
+  display: block;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+button[type="button"]:hover {
+  background-color: #2980b9;
+}
+
+/* Nutrition Facts Styles */
+.nutrition-facts {
+  flex: 1;
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.nutrition-facts input {
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.nutrition-facts h2 {
+  margin-top: 0;
+}
+
+.edit-delete-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+button.bluebtn {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button.bluebtn:hover {
+  background-color: #2980b9;
+}
+
+button.redbtn {
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button.redbtn:hover {
+  background-color: #c0392b;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .container-wrapper {
+    flex-direction: column;
+  }
+
+  .stats-card {
+    flex-direction: column;
+  }
+
+  .time-item {
+    margin-bottom: 10px;
+  }
+}

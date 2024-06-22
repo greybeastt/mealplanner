@@ -113,7 +113,7 @@ body {
 }
 
 .bluebtn {
-  background-color: navy;
+background-color: #3498db;
   color: white;
   padding: 10px 20px; /* Add horizontal padding for a better look */
   font-size: 16px;
@@ -124,8 +124,8 @@ body {
   cursor: pointer; /* Change cursor to pointer on hover */
 }
 
-.redbtn {
-  background-color: darkred;
+button.redbtn {
+  background-color: #e74c3c;
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -136,15 +136,15 @@ body {
   cursor: pointer; /* Change cursor to pointer on hover */
 }
 
-/* Optional: Add hover effects for buttons */
-.bluebtn:hover {
-  background-color: darkblue; /* Slightly darker shade on hover */
+button.bluebtn:hover {
+  background-color: #2980b9;
 }
 
-.redbtn:hover {
-  background-color: darkred; /* Slightly darker shade on hover */
-}
 
+
+button.redbtn:hover {
+  background-color: #c0392b;
+}
 
 /* Media Queries */
 @media (max-width: 1024px) {

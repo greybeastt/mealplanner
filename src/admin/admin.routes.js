@@ -6,6 +6,7 @@ const {
   recipies,
   getRecipe,
   createview,
+  createEditView,
 } = require("./admin.constrollers");
 
 const router = express.Router();
@@ -19,6 +20,8 @@ router.get("/recipies", authenticateToken, recipies);
 
 router.route("/recipe/view/:recipeID").all().get(createview);
 router.route("/recipe/:recipeID").all().get(getRecipe);
+
+router.route("/recipe/view/edit/:recipeID").all().get(createEditView);
 
 router.get("/", (req, res, next) => {
   res.sendFile(path.join(__dirname, "../../public/auth.html"));

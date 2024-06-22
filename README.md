@@ -36,4 +36,3 @@
   | 7           | x          | breakfast, snacks,launch, snack, dinner, snacks; snacks is less 10% of the total cals                 |
   | 8           | x          | breakfast, snacks,launch, snack, dinner, snacks, snacks; snacks is less 10% of the total cals         |
   | 9           | x          | breakfast, snacks, snacks,launch, snack, dinner, snacks, snacks; snacks is less 10% of the total cals |
-

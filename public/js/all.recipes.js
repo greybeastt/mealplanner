@@ -1,22 +1,36 @@
-const recipeElement = document.createElement("div");
-const paginationNumbers = document.getElementById("pagination-numbers");
-const nextButton = document.getElementById("next-button");
-const prevButton = document.getElementById("prev-button");
+const recipeTable = document.createElement("table");
+const paginationContainer = document.createElement("div");
+paginationContainer.classList.add("pagination-controls");
+
+const paginationNumbers = document.createElement("span");
+paginationNumbers.id = "pagination-numbers";
+
+const nextButton = document.createElement("button");
+nextButton.id = "next-button";
+nextButton.textContent = "Next";
+
+const prevButton = document.createElement("button");
+prevButton.id = "prev-button";
+prevButton.textContent = "Previous";
+
+paginationContainer.appendChild(prevButton);
+paginationContainer.appendChild(paginationNumbers);
+paginationContainer.appendChild(nextButton);
 
 let pageNumber = 1;
-paginationNumbers.textContent = `page ${pageNumber}`;
+paginationNumbers.textContent = `Page ${pageNumber}`;
 
 const load_next_page = () => {
   pageNumber += 1;
-  recipeElement.replaceChildren();
-  paginationNumbers.textContent = `page ${pageNumber}`;
+  recipeTable.innerHTML = "";
+  paginationNumbers.textContent = `Page ${pageNumber}`;
   fetchdata();
 };
 
 const load_prev_page = () => {
   pageNumber -= 1;
-  recipeElement.replaceChildren();
-  paginationNumbers.textContent = `page ${pageNumber}`;
+  recipeTable.innerHTML = "";
+  paginationNumbers.textContent = `Page ${pageNumber}`;
   fetchdata();
 };
 
@@ -33,22 +47,43 @@ const fetchdata = async () => {
     return;
   }
   const data = await response.json();
-  data.map((recipe) => {
-    recipeElement.classList.add("row", "food_result");
 
-    const innerCol = document.createElement("div");
-    innerCol.classList.add("col-11");
+  const tableHead = document.createElement("thead");
+  const headRow = document.createElement("tr");
 
-    const recipeLink = document.createElement("a");
-    recipeLink.classList.add("row");
-    recipeLink.href = `/admin/recipe/view/${recipe["_id"]}`; // TODO: replace with reciepe url
+  const imageHead = document.createElement("th");
+  imageHead.textContent = "Image";
+  headRow.appendChild(imageHead);
 
-    const imageCol = document.createElement("div");
-    imageCol.classList.add("search_result_image", "col-1");
+  const nameHead = document.createElement("th");
+  nameHead.textContent = "Recipe Name";
+  headRow.appendChild(nameHead);
+
+  const caloriesHead = document.createElement("th");
+  caloriesHead.textContent = "Calories";
+  headRow.appendChild(caloriesHead);
+
+  const fatsHead = document.createElement("th");
+  fatsHead.textContent = "Fats";
+  headRow.appendChild(fatsHead);
+
+  const proteinsHead = document.createElement("th");
+  proteinsHead.textContent = "Proteins";
+  headRow.appendChild(proteinsHead);
+
+  tableHead.appendChild(headRow);
+  recipeTable.appendChild(tableHead);
+
+  const tableBody = document.createElement("tbody");
+
+  data.forEach((recipe) => {
+    const row = document.createElement("tr");
+
+    const imageCell = document.createElement("td");
+    imageCell.setAttribute("data-label", "Image");
     const image = document.createElement("img");
-    image.width = "100";
-    image.height = "100";
-    // TODO: fix Images issue
+    // image.width = "100";
+    // image.height = "100";
     try {
       if (recipe["images"].length > 0) {
         image.src =
@@ -60,36 +95,45 @@ const fetchdata = async () => {
     } catch (err) {
       console.error(err);
     }
-    imageCol.appendChild(image);
+    imageCell.appendChild(image);
+    row.appendChild(imageCell);
 
-    const recipeName = document.createElement("div");
-    recipeName.classList.add("result_name", "col-3");
-    recipeName.textContent = recipe.food_name;
+    const nameCell = document.createElement("td");
+    nameCell.setAttribute("data-label", "Recipe Name");
+    const recipeLink = document.createElement("a");
+    recipeLink.href = `/admin/recipe/view/${recipe["_id"]}`;
+    recipeLink.textContent = recipe.food_name;
+    nameCell.appendChild(recipeLink);
+    row.appendChild(nameCell);
 
-    const statsCol = document.createElement("div");
-    statsCol.classList.add("col-8");
+    const caloriesCell = document.createElement("td");
+    caloriesCell.setAttribute("data-label", "Calories");
+    caloriesCell.textContent = Math.round(recipe.calories * 10) / 10 || 0;
+    row.appendChild(caloriesCell);
 
-    const statsRow = document.createElement("div");
-    statsRow.classList.add("row", "result_stats");
-    ["calories", "fats", "protiens"].forEach((nutrient) => {
-      const nutrientCell = document.createElement("div");
-      nutrientCell.classList.add("col-2", "offset-1", "nutrient_cell");
-      nutrientCell.textContent = Math.round(recipe[nutrient] * 10) / 10 || 0;
-      statsRow.appendChild(nutrientCell);
-    });
+    const fatsCell = document.createElement("td");
+    fatsCell.setAttribute("data-label", "Fats");
+    fatsCell.textContent = Math.round(recipe.fats * 10) / 10 || 0;
+    row.appendChild(fatsCell);
 
-    statsCol.appendChild(statsRow);
-    recipeLink.appendChild(imageCol);
-    recipeLink.appendChild(recipeName);
-    recipeLink.appendChild(statsCol);
+    const proteinsCell = document.createElement("td");
+    proteinsCell.setAttribute("data-label", "Proteins");
+    proteinsCell.textContent = Math.round(recipe.proteins * 10) / 10 || 0;
+    row.appendChild(proteinsCell);
 
-    innerCol.appendChild(recipeLink);
-    recipeElement.appendChild(innerCol);
-
-    document.querySelector(".results_view").appendChild(recipeElement);
+    tableBody.appendChild(row);
   });
+
+  recipeTable.appendChild(tableBody);
+
+  const resultsView = document.querySelector(".results_view");
+  resultsView.innerHTML = "";
+  resultsView.appendChild(recipeTable);
+  resultsView.appendChild(paginationContainer);
 };
 
-fetchdata();
-nextButton.addEventListener("click", load_next_page);
-prevButton.addEventListener("click", load_prev_page);
+document.addEventListener("DOMContentLoaded", () => {
+  fetchdata();
+  nextButton.addEventListener("click", load_next_page);
+  prevButton.addEventListener("click", load_prev_page);
+});

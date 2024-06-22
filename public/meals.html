@@ -7,90 +7,17 @@
     <link rel="stylesheet" href="/css/mealsbrowse.css" />
   </head>
   <body>
+    <div class="navbar">
+      <h1>Meal Planner</h1>
+    </div>
+
     <div class="row">
       <div class="col-10 search_padding results_view">
-        <div class="row food_table_header_right">
-          <div class="col-11">
-            <div class="row">
-              <div class="col-1 food_table_column_header">Image</div>
-
-              <div class="col-3 food_table_column_header">Title</div>
-
-              <div class="col-8">
-                <div class="row">
-                  <div class="col-1"></div>
-                  <a
-                    href="/food/browse/?type=recipe&amp;order_by=-calories"
-                    class="col-2 food_table_column_header sort_nutrient_link"
-                  >
-                    Calories
-
-                    <div class="hidden_arrow light_icon">
-                      <i class="fa fa-chevron-down"></i>
-                    </div>
-                  </a>
-
-                  <a
-                    href="/food/browse/?type=recipe&amp;order_by=-carbs"
-                    class="col-2 food_table_column_header sort_nutrient_link"
-                  >
-                    Carbs
-
-                    <div class="hidden_arrow light_icon">
-                      <i class="fa fa-chevron-down"></i>
-                    </div>
-                  </a>
-
-                  <a
-                    href="/food/browse/?type=recipe&amp;order_by=-fats"
-                    class="col-2 food_table_column_header sort_nutrient_link"
-                  >
-                    Fat
-                    <div class="hidden_arrow light_icon">
-                      <i class="fa fa-chevron-down"></i>
-                    </div>
-                  </a>
-
-                  <a
-                    href="/food/browse/?type=\recipe&amp;order_by=-proteins"
-                    class="col-2 food_table_column_header sort_nutrient_link"
-                  >
-                    Protein
-
-                    <div class="hidden_arrow light_icon">
-                      <i class="fa fa-chevron-down"></i>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="row food_table_header_right"></div>
       </div>
     </div>
     <br />
 
-    <nav class="pagination-container">
-      <button
-        class="pagination-button"
-        id="prev-button"
-        title="Previous page"
-        aria-label="Previous page"
-      >
-        &lt;
-      </button>
-
-      <div id="pagination-numbers"></div>
-
-      <button
-        class="pagination-button"
-        id="next-button"
-        title="Next page"
-        aria-label="Next page"
-      >
-        &gt;
-      </button>
-    </nav>
     <script src="./js/all.recipes.js"></script>
   </body>
 </html>

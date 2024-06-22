@@ -1,4 +1,7 @@
-const { generateRecipeHtml } = require("../utils/generateHtml.js");
+const {
+  generateRecipeHtml,
+  generateEditRecipeHtml,
+} = require("../utils/generateHtml.js");
 const { generateAccessToken } = require("../utils/jwt.js");
 const logger = require("../utils/logger.js");
 const Recipe = require("../model/receipe.model.js");
@@ -41,5 +44,13 @@ exports.getRecipe = async (req, res, next) => {
 exports.createview = async (req, res, next) => {
   const recipieID = req.params.recipeID;
   const recipe = await Recipe.findById(recipieID);
+  // res.send(generateRecipeHtml(recipe));
   res.send(generateRecipeHtml(recipe));
+};
+
+exports.createEditView = async (req, res, next) => {
+  const recipieID = req.params.recipeID;
+  const recipe = await Recipe.findById(recipieID);
+  // res.send(generateRecipeHtml(recipe));
+  res.send(generateEditRecipeHtml(recipe));
 };
