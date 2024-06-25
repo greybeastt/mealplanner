@@ -28,6 +28,7 @@ module.exports = class RecipeController {
       next(err);
     }
   }
+
   static async updateRecipe(req, res, next) {
     console.log(req.body);
     // TODO: implement it
@@ -38,6 +39,7 @@ module.exports = class RecipeController {
     // TODO: implement it
     res.status(200).end();
   }
+
   static async deleteRecipe(req, res, next) {
     // TODO: implement it
     res.status(200).end();

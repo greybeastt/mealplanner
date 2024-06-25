@@ -1,6 +1,35 @@
 const createHttpError = require("http-errors");
 const Recipe = require("../model/receipe.model");
-const logger = require("../utils/logger").default;
+const logger = require("../utils/logger");
+const error_margin = 20;
+
+const getRecipies = async (options, calories, type, order) => {
+  const recipes = await Recipe.find(
+    {
+      calories: {
+        $gt: calories / 2 - error_margin,
+        $lt: calories / 2 + error_margin,
+      },
+      ...options,
+    },
+    {
+      _id: 0,
+      food_name: 1,
+      calories: 1,
+      is_lunch: 1,
+    }
+  );
+
+  const select_random = [];
+  select_random.push(recipes[Math.round(Math.random() * 10) % recipes.length]);
+  select_random.push(recipes[Math.round(Math.random() * 10) % recipes.length]);
+
+  return {
+    type,
+    order,
+    recipes: select_random,
+  };
+};
 
 const validateCalories = (nMeals, cals) => {
   if (cals < Math.max(200, nMeals * 100) || nMeals * 4000 < cals) return false;
@@ -41,44 +70,41 @@ exports.validation = async (req, res, next) => {
     next(err);
   }
 };
-const genMeal = async (type, cals) => {
-  return recipes;
-};
 
 exports.generatePlan = [
   this.validation,
 
   async (req, res, next) => {
     const { numberOfMeals, calories } = req;
+    let ans = [];
+    let order = 1;
     // meal generation part
-    if (numberOfMeals === 1) {
-      try {
-        logger.info("hi");
-        const ans = [];
-        let recipes = await Recipe.find({
-          calories: { $lt: calories + 5, $gt: calories - 5 },
-          is_lunch: true,
-        });
-
-        console.log(recipes.length);
-        ans.push(recipes[Math.round(Math.random() * 10) % recipes.length]);
-        ans.push(recipes[Math.round(Math.random() * 10) % recipes.length]);
-
-        return res.send([
-          ans.map((e) => {
-            return {
-              food_name: e.food_name,
-              calories: e.calories,
-              is_lunch: e.is_lunch,
-            };
-          }),
-        ]);
-      } catch (err) {
-        console.error("Error fetching recipes:", err);
-        return res.status(500).send("Error fetching recipes");
+    try {
+      if (numberOfMeals === 1) {
+        ans.push(getRecipies({ is_lunch: true }, calories, "lunch", order));
+      } else if (numberOfMeals == 2) {
+        random_error = Math.random() % 0.1;
+        logger.info(random_error);
+        ans.push(
+          await getRecipies(
+            { is_lunch: true },
+            calories * (0.52 + random_error),
+            "lunch",
+            order
+          )
+        );
+        ans.push(
+          await getRecipies(
+            { is_breakfast: true },
+            calories * (1 - 0.52 + random_error),
+            "lunch",
+            order
+          )
+        );
       }
+      return res.send([ans]);
+    } catch (err) {
+      next(err);
     }
-
-    res.send(`${calories}, \n ${numberOfMeals}`);
   },
 ];
