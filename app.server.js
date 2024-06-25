@@ -12,6 +12,7 @@ const logger = require("./src/utils/logger");
 const adminRoute = require("./src/admin/admin.routes");
 const userRoute = require("./src/user/user.routes");
 
+
 app.disable("x-powered-by");
 
 app.use(cors());

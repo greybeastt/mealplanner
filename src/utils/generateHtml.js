@@ -1,6 +1,17 @@
 exports.generateRecipeHtml = (recipeData) => {
   const { food_name, ingredients, directions, default_image, nutrition } =
     recipeData;
+
+  const table_of_nutrition = Object.entries(nutrition)
+    .map(
+      ([key, value]) =>
+        `<tr>
+              <td>${key}</td>
+              <td>${value}</td>
+            </tr>`
+    )
+    .join("");
+
   const ingredientsHTML = ingredients
     .map((ingredient) => `<li>${ingredient.food.food_name}</li>`)
     .join("");
@@ -9,8 +20,6 @@ exports.generateRecipeHtml = (recipeData) => {
     .map((step) => `<li>${step.text}</li>`)
     .join("");
 
-  // ${JSON.stringify(nutrition)}
-  // number_servings
   return `
   <!DOCTYPE html>
 <html lang="en">
@@ -71,26 +80,7 @@ exports.generateRecipeHtml = (recipeData) => {
           <p><strong>Serving weight:</strong> 296g</p>
           <p><strong>Calories:</strong> 400</p>
           <table>
-            <tr>
-              <td>Total Fat</td>
-              <td>21g</td>
-            </tr>
-            <tr>
-              <td>Cholesterol</td>
-              <td>0.5mg</td>
-            </tr>
-            <tr>
-              <td>Sodium</td>
-              <td>780mg</td>
-            </tr>
-            <tr>
-              <td>Total Carbohydrate</td>
-              <td>46g</td>
-            </tr>
-            <tr>
-              <td>Protein</td>
-              <td>15g</td>
-            </tr>
+            ${table_of_nutrition}
           </table>
           <div class="edit-delete-buttons">
             <button class="bluebtn" id="btn.edit">Edit Recipe</button>
@@ -102,7 +92,6 @@ exports.generateRecipeHtml = (recipeData) => {
     <script src="/js/recipe.js"></script>
   </body>
 </html>
-
   `;
 };
 
@@ -157,6 +146,7 @@ exports.generateEditRecipeHtml = (recipeData) => {
     <!-- 1. CONTAINER -->
     <div class="container">
       <form action="/admin/recipe/update/${recipeData._id}" method="POST">
+        <button type="submit" class="createBtn">Create</button>
         <div class="container-wrapper">
           <div class="left-part">
             <!-- 1.1. time card  -->
@@ -165,13 +155,13 @@ exports.generateEditRecipeHtml = (recipeData) => {
                 <h4>Prep Time</h4>
                 <input type="number" name="prep_time" value="${
                   recipeData.prep_time
-                }" />
+                }"/>
               </div>
               <div class="time-item">
                 <h4>Cook Time</h4>
                 <input type="number" name="cook_time" value="${
                   recipeData.cook_time
-                }" />
+                }"/>
               </div>
               <div class="time-item">
                 <h4>Total Time</h4>
@@ -194,23 +184,15 @@ exports.generateEditRecipeHtml = (recipeData) => {
           <!-- 1.2. Nutrition div -->
           <div class="nutrition-facts">
             <h2>Nutrition Facts</h2>
-            <input type="number" name="number_servings" value="${
-              nutrition.number_servings
-            }" />
-            <input type="number" name="calories" value="${
-              nutrition.calories
-            }" />
-            <input type="number" name="total_fat" value="${
-              nutrition.total_fat
-            }" />
-            <input type="number" name="cholesterol" value="${
-              nutrition.cholesterol
-            }" />
-            <input type="number" name="sodium" value="${nutrition.sodium}" />
-            <input type="number" name="total_carbohydrate" value="${
-              nutrition.total_carbohydrate
-            }" />
-            <input type="number" name="protein" value="${nutrition.protein}" />
+            ${Object.entries(nutrition)
+              .map(
+                ([key, val]) =>
+                  `
+                <h4>${key}</h4>
+            <input type="number" name="${key}" value="${val}" />
+                `
+              )
+              .join("")}
             <div class="edit-delete-buttons">
               <button type="submit" class="bluebtn">Save Changes</button>
               <button type="button" class="redbtn" id="delete-recipe-button">Delete Recipe</button>
@@ -222,6 +204,5 @@ exports.generateEditRecipeHtml = (recipeData) => {
     <script src="/js/edit-recipe.js"></script>
   </body>
 </html>
-
   `;
 };

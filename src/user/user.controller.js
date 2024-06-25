@@ -1,6 +1,6 @@
 const createHttpError = require("http-errors");
 const Recipe = require("../model/receipe.model");
-const logger = require("../utils/logger");
+const logger = require("../utils/logger").default;
 
 const validateCalories = (nMeals, cals) => {
   if (cals < Math.max(200, nMeals * 100) || nMeals * 4000 < cals) return false;
@@ -69,7 +69,7 @@ exports.generatePlan = [
             return {
               food_name: e.food_name,
               calories: e.calories,
-              is_lunch: e.is_lunch
+              is_lunch: e.is_lunch,
             };
           }),
         ]);

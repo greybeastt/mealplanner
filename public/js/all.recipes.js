@@ -43,7 +43,7 @@ const fetchdata = async () => {
   const response = await fetch(`/admin/recipies?page=${pageNumber}`, options); // Replace with your API endpoint
 
   if (!response.ok) {
-    window.location.replace("/");
+    window.location.replace("/auth.html");
     return;
   }
   const data = await response.json();
@@ -82,8 +82,6 @@ const fetchdata = async () => {
     const imageCell = document.createElement("td");
     imageCell.setAttribute("data-label", "Image");
     const image = document.createElement("img");
-    // image.width = "100";
-    // image.height = "100";
     try {
       if (recipe["images"].length > 0) {
         image.src =

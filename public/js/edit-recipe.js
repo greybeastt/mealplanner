@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
   });
+
   const form = document.querySelector("form");
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -53,21 +54,21 @@ const handleFormSubmission = (form) => {
 
   alert("still in progress");
 
-  // fetch(`/admin/recipe/update/${recipeId}`, {
-  //   method: "POST",
-  //   body: formData,
-  // })
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     if (data.success) {
-  //       alert("Recipe updated successfully.");
-  //       window.location.href = `/admin/recipe/view/${recipeId}`;
-  //     } else {
-  //       alert("Failed to update the recipe.");
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     console.error("Error:", error);
-  //     alert("An error occurred while updating the recipe.");
-  //   });
+  fetch(`/admin/recipe/${recipeId}`, {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        alert("Recipe updated successfully.");
+        // window.location.href = `/admin/recipe/view/${recipeId}`;
+      } else {
+        alert("Failed to update the recipe.");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("An error occurred while updating the recipe.");
+    });
 };
