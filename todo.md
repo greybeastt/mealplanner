@@ -1,6 +1,6 @@
 1. Recipe Update
 
-   - [ ] ui
+   - [x] ui
    - [ ] endpoint
 
 2. Recipe Create

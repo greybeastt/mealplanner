@@ -29,6 +29,7 @@ module.exports = class RecipeController {
     }
   }
   static async updateRecipe(req, res, next) {
+    console.log(req.body);
     // TODO: implement it
     res.status(200).end();
   }

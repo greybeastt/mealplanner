@@ -40,35 +40,60 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  const form = document.querySelector("form");
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    handleFormSubmission(form);
-  });
+  const form = document.getElementById("updateRecipe");
+  form.addEventListener("submit", formHandler);
 });
 
-const handleFormSubmission = (form) => {
+const formHandler = async (e) => {
+  e.preventDefault();
+
+  const reciepeId = window.location.pathname.split("/").at(-1);
+  const form = e.target;
   const formData = new FormData(form);
-  const recipeId = form.action.split("/").pop();
-  console.log(JSON.stringify(formData));
+  let recipeData = {};
 
-  alert("still in progress");
+  recipeData.prep_time = formData.get("prep_time");
+  recipeData.cook_time = formData.get("cook_time");
 
-  fetch(`/admin/recipe/${recipeId}`, {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.success) {
-        alert("Recipe updated successfully.");
-        // window.location.href = `/admin/recipe/view/${recipeId}`;
-      } else {
-        alert("Failed to update the recipe.");
+  recipeData.directions = [];
+  form
+    .querySelectorAll(".direction-item textarea")
+    .forEach((textarea, index) => {
+      if (textarea.value.trim() == "") {
+        return;
       }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      alert("An error occurred while updating the recipe.");
+      recipeData.directions.push(textarea.value.trim());
     });
+
+  recipeData.ingredients = [];
+  form.querySelectorAll(".ingredient-item input").forEach((input, index) => {
+    recipeData.ingredients.push(input.value);
+  });
+
+  recipeData.nutritions = {};
+  form.querySelectorAll(".nutrition-facts input").forEach((input) => {
+    recipeData.nutritions[input.name] = parseFloat(input.value);
+  });
+  // Sending the data
+  try {
+    const response = await fetch(`/admin/recipe/${reciepeId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(recipeData),
+    });
+
+    if (response.ok) {
+      // const result = await response.json();
+      alert("Recipe updated successfully!");
+      // Optionally redirect or update the UI
+    } else {
+      alert("Failed to update recipe.");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("An error occurred while updating the recipe.");
+  }
+  // window.location.href = `/admin/recipe/view/${recipeId}`;
 };

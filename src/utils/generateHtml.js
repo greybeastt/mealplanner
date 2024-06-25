@@ -145,8 +145,8 @@ exports.generateEditRecipeHtml = (recipeData) => {
 
     <!-- 1. CONTAINER -->
     <div class="container">
-      <form action="/admin/recipe/update/${recipeData._id}" method="POST">
-        <button type="submit" class="createBtn">Create</button>
+      <form id="updateRecipe" action="" method="POST">
+        <button type="submit" class="createBtn">Update</button>
         <div class="container-wrapper">
           <div class="left-part">
             <!-- 1.1. time card  -->
@@ -193,8 +193,6 @@ exports.generateEditRecipeHtml = (recipeData) => {
                 `
               )
               .join("")}
-            <div class="edit-delete-buttons">
-              <button type="submit" class="bluebtn">Save Changes</button>
               <button type="button" class="redbtn" id="delete-recipe-button">Delete Recipe</button>
             </div>
           </div>
