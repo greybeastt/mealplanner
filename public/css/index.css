@@ -23,11 +23,19 @@ body {
   margin: 0 auto;
 }
 
+.page-intro {
+  text-align: center;
+  width: 40%;
+  margin-inline: auto;
+  margin-top: 8vh;
+  margin-bottom: 5vh;
+}
+
 .main-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20vh;
+  /* margin-top: 20vh; */
 }
 
 .container {
