@@ -1,3 +1,7 @@
+let production = true;
+const baseUrl = production
+  ? "https://mealplanner-86af.onrender.com"
+  : "localhost:3000";
 const mealColumn = document.querySelector(".meal-row");
 const modal = document.querySelector(".modal");
 const generateButton = document.getElementById("generateButton");
@@ -80,9 +84,7 @@ const generateBtnHandler = async () => {
     document.getElementById("num_meals_selector").value || 0;
 
   try {
-    const res = await fetch(
-      `http://localhost:3000/api/v1/${numberOfMeals}/${calories}`
-    );
+    const res = await fetch(`${baseUrl}/api/v1/${numberOfMeals}/${calories}`);
     if (!res.ok) {
       throw new Error(`Error: ${res.statusText}`);
     }

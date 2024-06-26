@@ -35,7 +35,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* margin-top: 20vh; */
 }
 
 .container {
@@ -64,7 +63,7 @@ select {
   margin: 0 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 100px; /* Adjust the width as needed */
+  width: 100px;
   text-align: center;
 }
 
@@ -87,12 +86,37 @@ button:hover {
 }
 
 @media (max-width: 600px) {
+  .page-intro {
+    width: 80%;
+  }
+
   .container {
+    min-width: 80%;
     padding: 15px;
   }
 
+  input[type="number"],
+  select {
+    width: 80px;
+  }
+
   button {
+    width: 60%;
     padding: 8px 16px;
+  }
+
+  .meal-row {
+    min-width: 80%;
+    /* margin: 10px auto; */
+  }
+
+  .meal-item img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .modal {
+    width: 100px;
   }
 }
 
@@ -103,7 +127,7 @@ button:hover {
   align-items: center;
   flex-wrap: wrap;
   margin-top: 20px;
-  /* width: 100%; */
+  min-width: 60%;
 }
 
 .meal {
@@ -111,7 +135,7 @@ button:hover {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 10px;
-  min-width: 450px;
+  min-width: 40%;
   margin: 10px;
 }
 
@@ -156,6 +180,7 @@ button:hover {
   margin: 5px 0 0;
   color: #888;
 }
+
 .meal-item:hover {
   cursor: grab;
 }
@@ -168,28 +193,27 @@ button:hover {
   border-radius: 16px;
   display: none;
   position: absolute;
-  /* top: 0; */
   left: 100%;
   z-index: 5;
-  /* display: none; */
-  /* position: absolute; */
-  /* top: 10px; */
-  /* left: 10px; */
 }
+
 .modal.active {
   display: block;
 }
+
 .modal h1 {
   font-size: 16px;
   font-weight: lighter;
   margin-bottom: 5px;
 }
+
 .modal h3 {
   font-size: 12px;
   font-weight: lighter;
-  padding: 0px;
+  padding: 0;
   margin: 0;
 }
+
 .modal hr {
   height: 1px;
   border: none;
@@ -209,6 +233,7 @@ button:hover {
   margin: 10px 0px;
   font-weight: lighter;
 }
+
 .row1 {
   color: whitesmoke;
 }
@@ -228,6 +253,7 @@ button:hover {
 th {
   text-align: left;
 }
+
 .show {
   display: block;
 }
