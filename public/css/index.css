@@ -148,6 +148,9 @@ button:hover {
   margin: 5px 0 0;
   color: #888;
 }
+.meal-item:hover {
+  cursor: grab;
+}
 
 .modal {
   background-color: rgba(0, 0, 0, 0.85);
