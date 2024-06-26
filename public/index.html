@@ -1,100 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meal Planner</title>
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link rel="stylesheet" href="./css/index.css" />
-</head>
-
-<body>
-  <!-- NAVBAR -->
-  <div id="top_nav" class="navbar">
-    <a class="navbar-brand" href="/">
-      <img src="images/icon3.png" width="60" height="60" alt="Icon" />
-    </a>
-  </div>
-
-  <!-- MAIN CONTENT -->
-  <div class="main-content">
-    <!-- CARD -->
-    <div class="container">
-      <div class="input-group">
-        <label for="cal_input">I want to eat</label>
-        <input type="number" min="0" max="20000" step="100" placeholder="####" value="" id="cal_input">
-        <label for="cal_input" id="cal-input-label">Calories</label>
-      </div>
-      <div class="input-group">
-        <label for="num_meals_selector">in</label>
-        <select id="num_meals_selector">
-          <option value="1">1 meal</option>
-          <option value="2">2 meals</option>
-          <option value="3">3 meals</option>
-          <option value="4" selected>4 meals</option>
-          <option value="5">5 meals</option>
-          <option value="6">6 meals</option>
-          <option value="7">7 meals</option>
-          <option value="8">8 meals</option>
-          <option value="9">9 meals</option>
-        </select>
-        <label for="num_meals_selector" id="meals-label">meals</label>
-      </div>
-      <button id="generateButton" type="button" data-loading-text="Generate">Generate</button>
+  <body>
+    <!-- NAVBAR -->
+    <div id="top_nav" class="navbar">
+      <a class="navbar-brand" href="/">
+        <img src="images/icon3.png" width="60" height="60" alt="Icon" />
+      </a>
     </div>
 
-    <!-- MEAL SECTION -->
-    <div class="meal-row">
-      <div class="meal">
-        <div class="meal-header">
-          <h2>Breakfast</h2>
-          <p>145 Calories</p>
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <!-- CARD -->
+      <div class="container">
+        <div class="input-group">
+          <label for="cal_input">I want to eat</label>
+          <input
+            type="number"
+            min="0"
+            max="20000"
+            step="100"
+            placeholder="####"
+            value="1000"
+            id="cal_input"
+          />
+          <label for="cal_input" id="cal-input-label">Calories</label>
         </div>
-        <div class="meal-item">
-          <img src="https://www.eatthismuch.com/static_files/images/landing-background-tomato2-horizontal.webp"
-            alt="Curry Scramble">
-          <div class="meal-details">
-            <h3>Curry Scramble</h3>
-            <p>1 serving</p>
-          </div>
+        <div class="input-group">
+          <label for="num_meals_selector">in</label>
+          <select id="num_meals_selector">
+            <option value="1">1 meal</option>
+            <option value="2">2 meals</option>
+            <option value="3">3 meals</option>
+            <option value="4" selected>4 meals</option>
+            <option value="5">5 meals</option>
+            <option value="6">6 meals</option>
+            <option value="7">7 meals</option>
+            <option value="8">8 meals</option>
+            <option value="9">9 meals</option>
+          </select>
+          <label for="num_meals_selector" id="meals-label">meals</label>
         </div>
-        <div class="meal-item">
-          <img src="https://www.eatthismuch.com/static_files/images/landing-background-tomato2-horizontal.webp"
-            alt="Strawberries">
-          <div class="meal-details">
-            <h3>Strawberries</h3>
-            <p>1 cup</p>
-          </div>
-        </div>
+        <button id="generateButton" type="button" data-loading-text="Generate">
+          Generate
+        </button>
       </div>
+
+      <!-- MEAL SECTION -->
+      <div class="meal-row"></div>
+
       <!-- Add more meal sections if needed -->
-      <div class="meal-row">
-        <div class="meal">
-          <div class="meal-header">
-            <h2>Breakfast</h2>
-            <p>145 Calories</p>
-          </div>
-          <div class="meal-item">
-            <img src="https://www.eatthismuch.com/static_files/images/landing-background-tomato2-horizontal.webp"
-              alt="Curry Scramble">
-            <div class="meal-details">
-              <h3>Curry Scramble</h3>
-              <p>1 serving</p>
-            </div>
-          </div>
-          <div class="meal-item">
-            <img src="https://www.eatthismuch.com/static_files/images/landing-background-tomato2-horizontal.webp"
-              alt="Strawberries">
-            <div class="meal-details">
-              <h3>Strawberries</h3>
-              <p>1 cup</p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <script src="./js/get-recipes.js"></script>
-</body>
-
+    <script src="/js/generateplan.js"></script>
+  </body>
 </html>

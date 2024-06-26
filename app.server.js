@@ -12,7 +12,6 @@ const logger = require("./src/utils/logger");
 const adminRoute = require("./src/admin/admin.routes");
 const userRoute = require("./src/user/user.routes");
 
-
 app.disable("x-powered-by");
 
 app.use(cors());
@@ -32,7 +31,7 @@ app.use("/api/v1", userRoute);
 
 app.use((err, req, res, next) => {
   logger.error(err);
-  res.status(res.statusCode || 500);
+  res.status(err.statusCode || res.statusCode || 500);
   res.send({ error: err.message });
 });
 

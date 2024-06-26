@@ -1,7 +1,9 @@
 body {
-  background-image: url("https://www.eatthismuch.com/static_files/images/landing-background-tomato2-horizontal.webp");
-  background-size: cover;
-  background-position: center top;
+  background-image:url("/images/landing-img.png"); 
+  background-color: #F9F9F9;
+
+  background-size: 32%;
+  background-position: left top;
   background-repeat: no-repeat;
   height: 100vh;
   margin: 0;
@@ -34,7 +36,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   text-align: center;
-  width: 50%;
+  min-width: 32%;
 }
 
 .input-group {
@@ -54,7 +56,7 @@ select {
   margin: 0 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 80px; /* Adjust the width as needed */
+  width: 100px; /* Adjust the width as needed */
   text-align: center;
 }
 
@@ -66,8 +68,10 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 30%;
+  width: 32%;
+  height: 16%;
   font-weight: 500;
+  font-size: medium;
 }
 
 button:hover {
@@ -86,12 +90,12 @@ button:hover {
 
 .meal-row {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
   margin-top: 20px;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .meal {
@@ -99,7 +103,7 @@ button:hover {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 10px;
-  max-width: 400px;
+  min-width: 450px;
   margin: 10px;
 }
 
@@ -123,6 +127,7 @@ button:hover {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  width: 100%;
 }
 
 .meal-item img {

@@ -44,27 +44,30 @@ exports.validation = async (req, res, next) => {
 };
 
 const getRecipies = async (options, calories, type, order) => {
-  const recipes = await Recipe.find(
-    {
-      calories: {
-        $gt: calories / 2 - error_margin,
-        $lt: calories / 2 + error_margin,
-      },
-      ...options,
-    }
-    // {
-    //   _id: 0,
-    //   food_name: 1,
-    //   calories: 1,
-    // }
-  );
+  const recipes = await Recipe.find({
+    calories: {
+      $gt: calories / 2 - error_margin,
+      $lt: calories / 2 + error_margin,
+    },
+    ...options,
+  });
   if (recipes.length === 0) {
     return getRecipies(options, calories + 50, type, order);
   }
-
-  const select_random = [];
-  select_random.push(recipes[Math.round(Math.random() * 10) % recipes.length]);
-  select_random.push(recipes[Math.round(Math.random() * 10) % recipes.length]);
+  let select_random = [];
+  let recipes_length = recipes.length;
+  
+  let first_idx = Math.floor(Math.random() * recipes_length);
+  
+  let second_idx = Math.floor(Math.random() * (recipes_length - 1));
+  if (second_idx >= first_idx) {
+    second_idx++;
+  }
+  
+  select_random.push(recipes[first_idx]);
+  select_random.push(recipes[second_idx]);
+  
+  
 
   return {
     type,
