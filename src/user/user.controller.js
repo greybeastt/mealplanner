@@ -1,35 +1,7 @@
 const createHttpError = require("http-errors");
 const Recipe = require("../model/receipe.model");
 const logger = require("../utils/logger");
-const error_margin = 20;
-
-const getRecipies = async (options, calories, type, order) => {
-  const recipes = await Recipe.find(
-    {
-      calories: {
-        $gt: calories / 2 - error_margin,
-        $lt: calories / 2 + error_margin,
-      },
-      ...options,
-    },
-    {
-      _id: 0,
-      food_name: 1,
-      calories: 1,
-      is_lunch: 1,
-    }
-  );
-
-  const select_random = [];
-  select_random.push(recipes[Math.round(Math.random() * 10) % recipes.length]);
-  select_random.push(recipes[Math.round(Math.random() * 10) % recipes.length]);
-
-  return {
-    type,
-    order,
-    recipes: select_random,
-  };
-};
+const error_margin = 50;
 
 const validateCalories = (nMeals, cals) => {
   if (cals < Math.max(200, nMeals * 100) || nMeals * 4000 < cals) return false;
@@ -71,38 +43,94 @@ exports.validation = async (req, res, next) => {
   }
 };
 
+const getRecipies = async (options, calories, type, order) => {
+  const recipes = await Recipe.find(
+    {
+      calories: {
+        $gt: calories / 2 - error_margin,
+        $lt: calories / 2 + error_margin,
+      },
+      ...options,
+    }
+    // {
+    //   _id: 0,
+    //   food_name: 1,
+    //   calories: 1,
+    // }
+  );
+  if (recipes.length === 0) {
+    return getRecipies(options, calories + 50, type, order);
+  }
+
+  const select_random = [];
+  select_random.push(recipes[Math.round(Math.random() * 10) % recipes.length]);
+  select_random.push(recipes[Math.round(Math.random() * 10) % recipes.length]);
+
+  return {
+    type,
+    order,
+    recipes: select_random,
+  };
+};
+
 exports.generatePlan = [
   this.validation,
-
   async (req, res, next) => {
-    const { numberOfMeals, calories } = req;
-    let ans = [];
-    let order = 1;
-    // meal generation part
     try {
-      if (numberOfMeals === 1) {
-        ans.push(getRecipies({ is_lunch: true }, calories, "lunch", order));
-      } else if (numberOfMeals == 2) {
-        random_error = Math.random() % 0.1;
-        logger.info(random_error);
-        ans.push(
-          await getRecipies(
-            { is_lunch: true },
-            calories * (0.52 + random_error),
-            "lunch",
-            order
-          )
-        );
-        ans.push(
-          await getRecipies(
-            { is_breakfast: true },
-            calories * (1 - 0.52 + random_error),
-            "lunch",
-            order
-          )
-        );
-      }
-      return res.send([ans]);
+      const { numberOfMeals, calories } = req;
+      let order = 1;
+      const idk = {
+        breakfast: { options: { is_breakfast: true, breakfast: true } },
+        lunch: { options: { is_lunch: true } },
+        dinner: { options: { is_dinner: true } },
+        snack: { options: { is_snack: true } },
+      };
+
+      const plans = {
+        1: ["lunch"],
+        2: ["lunch", "dinner"],
+        3: ["breakfast", "lunch", "dinner"],
+        4: ["breakfast", "lunch", "dinner", "snack"],
+        5: ["breakfast", "lunch", "snack", "dinner", "snack"],
+        6: ["breakfast", "snack", "lunch", "snack", "dinner", "snack"],
+        7: ["breakfast", "snack", "lunch", "snack", "snack", "dinner", "snack"],
+        8: [
+          "breakfast",
+          "snack",
+          "lunch",
+          "snack",
+          "snack",
+          "dinner",
+          "snack",
+          "snack",
+        ],
+        9: [
+          "breakfast",
+          "snack",
+          "snack",
+          "lunch",
+          "snack",
+          "snack",
+          "dinner",
+          "snack",
+          "snack",
+        ],
+      };
+
+      const plan = plans[numberOfMeals];
+      let meal_calories =
+        numberOfMeals > 3
+          ? (calories * (1 - 0.1 * numberOfMeals)) / numberOfMeals
+          : calories / numberOfMeals;
+      let promises = plan.map((meal) => {
+        if (meal === "snack") {
+          return getRecipies(idk[meal].options, calories * 0.1, meal, order++);
+        }
+        return getRecipies(idk[meal].options, meal_calories, meal, order++);
+      });
+
+      let ans = await Promise.all(promises);
+      res.send(ans);
     } catch (err) {
       next(err);
     }

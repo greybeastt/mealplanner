@@ -1,335 +1,331 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit Simple Rosemary Chicken Breast</title>
-    <link rel="stylesheet" href="/css/edit-recipe.css" />
-    <link rel="stylesheet" href="/css/recipe.css" />
-    <link
-      rel="stylesheet"
-      href="path/to/font-awesome/css/font-awesome.min.css"
-    />
-  </head>
-  <body>
-    <!-- NAV -->
 
-    <div class="navbar">
-      <h1>Edit Simple Rosemary Chicken Breast</h1>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Simple Rosemary Chicken Breast</title>
+  <link rel="stylesheet" href="/css/edit-recipe.css" />
+  <link rel="stylesheet" href="/css/recipe.css" />
+</head>
 
-    <!-- IMAGE -->
-    <div class="header">
-      <img
-        src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
-        alt="Header Image"
-      />
-    </div>
+<body>
+  <!-- NAV -->
 
-    <!-- 1. CONTAINER -->
-    <div class="container">
-      <form action="/admin/recipes/" method="POST">
-        <button type="submit" class="createBtn">Create</button>
-        <div class="container-wrapper">
-          <div class="left-part">
-            <!-- 1.1. time card  -->
-            <div class="stats-card">
-              <div class="time-item">
-                <h4>Prep Time</h4>
-                <input type="number" name="prep_time" value="0" />
-              </div>
-              <div class="time-item">
-                <h4>Cook Time</h4>
-                <input type="number" name="cook_time" value="0" />
-              </div>
-              <div class="time-item">
-                <h4>Total Time</h4>
-                <p>50 minutes</p>
-              </div>
+  <div class="navbar">
+    <h1>Edit Simple Rosemary Chicken Breast</h1>
+  </div>
+
+  <!-- IMAGE -->
+  <div class="header">
+    <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="Header Image" />
+  </div>
+
+  <!-- 1. CONTAINER -->
+  <div class="container">
+    <form action="/admin/recipes/" method="POST">
+      <button type="submit" class="createBtn">Create</button>
+      <div class="container-wrapper">
+        <div class="left-part">
+          <!-- 1.1. time card  -->
+          <div class="stats-card">
+            <div class="time-item">
+              <h4>Prep Time</h4>
+              <input type="number" name="prep_time" value="0" />
             </div>
-
-            <h2>Ingredients</h2>
-            <div id="ingredients-list">
-              <div class="ingredient-item">
-                <input type="text" name="ingredients[0][food_name]" value="" />
-              </div>
+            <div class="time-item">
+              <h4>Cook Time</h4>
+              <input type="number" name="cook_time" value="0" />
             </div>
-            <button type="button" id="add-ingredient-button">
-              Add Ingredient
-            </button>
-
-            <h2>Instructions</h2>
-            <div id="directions-list">
-              <div class="direction-item">
-                <textarea name="directions[0][text]"> </textarea>
-              </div>
+            <div class="time-item">
+              <h4>Total Time</h4>
+              <p>50 minutes</p>
             </div>
-            <button type="button" id="add-direction-button">
-              Add Direction
-            </button>
           </div>
-          <!-- 1.2. Nutrition div -->
-          <div class="nutrition-facts">
-            <h2>Nutrition Facts</h2>
-            <h4>servings</h4>
-            <input type="number" name="servings" value="0" />
-            <h4>serving weight</h4>
-            <input type="number" name="serving_weight" value="0" />
-            <h4>calories</h4>
-            <input type="number" name="calories" value="0" />
-            <hr />
 
-            <h4>ala_fatty_acid</h4>
-            <input type="number" name="ala_fatty_acid" value="0" />
-
-            <h4>alanine</h4>
-            <input type="number" name="alanine" value="0" />
-
-            <h4>alcohol</h4>
-            <input type="number" name="alcohol" value="0" />
-
-            <h4>alpha_carotene</h4>
-            <input type="number" name="alpha_carotene" value="0" />
-
-            <h4>arginine</h4>
-            <input type="number" name="arginine" value="0" />
-
-            <h4>aspartic_acid</h4>
-            <input type="number" name="aspartic_acid" value="0" />
-
-            <h4>beta_carotene</h4>
-            <input type="number" name="beta_carotene" value="0" />
-
-            <h4>betaine</h4>
-            <input type="number" name="betaine" value="0" />
-
-            <h4>caffeine</h4>
-            <input type="number" name="caffeine" value="0" />
-
-            <h4>calcium</h4>
-            <input type="number" name="calcium" value="0" />
-
-            <h4>calories</h4>
-            <input type="number" name="calories" value="0" />
-
-            <h4>carbs</h4>
-            <input type="number" name="carbs" value="0" />
-
-            <h4>cholesterol</h4>
-            <input type="number" name="cholesterol" value="0" />
-
-            <h4>choline</h4>
-            <input type="number" name="choline" value="0" />
-
-            <h4>copper</h4>
-            <input type="number" name="copper" value="0" />
-
-            <h4>cystine</h4>
-            <input type="number" name="cystine" value="0" />
-
-            <h4>dha_fatty_acid</h4>
-            <input type="number" name="dha_fatty_acid" value="0" />
-
-            <h4>dpa_fatty_acid</h4>
-            <input type="number" name="dpa_fatty_acid" value="0" />
-
-            <h4>epa_fatty_acid</h4>
-            <input type="number" name="epa_fatty_acid" value="0" />
-
-            <h4>fats</h4>
-            <input type="number" name="fats" value="0" />
-
-            <h4>fiber</h4>
-            <input type="number" name="fiber" value="0" />
-
-            <h4>fluoride</h4>
-            <input type="number" name="fluoride" value="0" />
-
-            <h4>folate</h4>
-            <input type="number" name="folate" value="0" />
-
-            <h4>fructose</h4>
-            <input type="number" name="fructose" value="0" />
-
-            <h4>fruit_servings</h4>
-            <input type="number" name="fruit_servings" value="0" />
-
-            <h4>galactose</h4>
-            <input type="number" name="galactose" value="0" />
-
-            <h4>glucose</h4>
-            <input type="number" name="glucose" value="0" />
-
-            <h4>glutamic_acid</h4>
-            <input type="number" name="glutamic_acid" value="0" />
-
-            <h4>glycine</h4>
-            <input type="number" name="glycine" value="0" />
-
-            <h4>histidine</h4>
-            <input type="number" name="histidine" value="0" />
-
-            <h4>hydroxyproline</h4>
-            <input type="number" name="hydroxyproline" value="0" />
-
-            <h4>iron</h4>
-            <input type="number" name="iron" value="0" />
-
-            <h4>isoleucine</h4>
-            <input type="number" name="isoleucine" value="0" />
-
-            <h4>lactose</h4>
-            <input type="number" name="lactose" value="0" />
-
-            <h4>leucine</h4>
-            <input type="number" name="leucine" value="0" />
-
-            <h4>lycopene</h4>
-            <input type="number" name="lycopene" value="0" />
-
-            <h4>lysine</h4>
-            <input type="number" name="lysine" value="0" />
-
-            <h4>magnesium</h4>
-            <input type="number" name="magnesium" value="0" />
-
-            <h4>maltose</h4>
-            <input type="number" name="maltose" value="0" />
-
-            <h4>manganese</h4>
-            <input type="number" name="manganese" value="0" />
-
-            <h4>methionine</h4>
-            <input type="number" name="methionine" value="0" />
-
-            <h4>monounsaturated_fats</h4>
-            <input type="number" name="monounsaturated_fats" value="0" />
-
-            <h4>niacin</h4>
-            <input type="number" name="niacin" value="0" />
-
-            <h4>pantothenic_acid</h4>
-            <input type="number" name="pantothenic_acid" value="0" />
-
-            <h4>phenylalanine</h4>
-            <input type="number" name="phenylalanine" value="0" />
-
-            <h4>phosphorus</h4>
-            <input type="number" name="phosphorus" value="0" />
-
-            <h4>polyunsaturated_fats</h4>
-            <input type="number" name="polyunsaturated_fats" value="0" />
-
-            <h4>potassium</h4>
-            <input type="number" name="potassium" value="0" />
-
-            <h4>price</h4>
-            <input type="number" name="price" value="0" />
-
-            <h4>proline</h4>
-            <input type="number" name="proline" value="0" />
-
-            <h4>proteins</h4>
-            <input type="number" name="proteins" value="0" />
-
-            <h4>retinol</h4>
-            <input type="number" name="retinol" value="0" />
-
-            <h4>riboflavin</h4>
-            <input type="number" name="riboflavin" value="0" />
-
-            <h4>saturated_fats</h4>
-            <input type="number" name="saturated_fats" value="0" />
-
-            <h4>selenium</h4>
-            <input type="number" name="selenium" value="0" />
-
-            <h4>serine</h4>
-            <input type="number" name="serine" value="0" />
-
-            <h4>sodium</h4>
-            <input type="number" name="sodium" value="0" />
-
-            <h4>starch</h4>
-            <input type="number" name="starch" value="0" />
-
-            <h4>sucrose</h4>
-            <input type="number" name="sucrose" value="0" />
-
-            <h4>sugar</h4>
-            <input type="number" name="sugar" value="0" />
-
-            <h4>theobromine</h4>
-            <input type="number" name="theobromine" value="0" />
-
-            <h4>thiamine</h4>
-            <input type="number" name="thiamine" value="0" />
-
-            <h4>threonine</h4>
-            <input type="number" name="threonine" value="0" />
-
-            <h4>total_omega_3</h4>
-            <input type="number" name="total_omega_3" value="0" />
-
-            <h4>total_omega_6</h4>
-            <input type="number" name="total_omega_6" value="0" />
-
-            <h4>trans_fats</h4>
-            <input type="number" name="trans_fats" value="0" />
-
-            <h4>tryptophan</h4>
-            <input type="number" name="tryptophan" value="0" />
-
-            <h4>tyrosine</h4>
-            <input type="number" name="tyrosine" value="0" />
-
-            <h4>valine</h4>
-            <input type="number" name="valine" value="0" />
-
-            <h4>veggie_servings</h4>
-            <input type="number" name="veggie_servings" value="0" />
-
-            <h4>vit_a</h4>
-            <input type="number" name="vit_a" value="0" />
-
-            <h4>vit_a_iu</h4>
-            <input type="number" name="vit_a_iu" value="0" />
-
-            <h4>vit_b12</h4>
-            <input type="number" name="vit_b12" value="0" />
-
-            <h4>vit_b6</h4>
-            <input type="number" name="vit_b6" value="0" />
-
-            <h4>vit_c</h4>
-            <input type="number" name="vit_c" value="0" />
-
-            <h4>vit_d</h4>
-            <input type="number" name="vit_d" value="0" />
-
-            <h4>vit_d2</h4>
-            <input type="number" name="vit_d2" value="0" />
-
-            <h4>vit_d3</h4>
-            <input type="number" name="vit_d3" value="0" />
-
-            <h4>vit_d_iu</h4>
-            <input type="number" name="vit_d_iu" value="0" />
-
-            <h4>vit_e</h4>
-            <input type="number" name="vit_e" value="1" />
-
-            <h4>vit_k</h4>
-            <input type="number" name="vit_k" value="0" />
-
-            <h4>water</h4>
-            <input type="number" name="water" value="0" />
-
-            <h4>zinc</h4>
-            <input type="number" name="zinc" value="0" />
+          <h2>Ingredients</h2>
+          <div id="ingredients-list">
+            <div class="ingredient-item">
+              <input type="text" name="ingredients[0][food_name]" value="" />
+            </div>
           </div>
+          <button type="button" id="add-ingredient-button">
+            Add Ingredient
+          </button>
+
+          <h2>Instructions</h2>
+          <div id="directions-list">
+            <div class="direction-item">
+              <textarea name="directions[0][text]"> </textarea>
+            </div>
+          </div>
+          <button type="button" id="add-direction-button">
+            Add Direction
+          </button>
         </div>
-      </form>
-    </div>
-    <script src="/js/edit-recipe.js"></script>
-  </body>
+        <!-- 1.2. Nutrition div -->
+        <div class="nutrition-facts">
+          <h2>Nutrition Facts</h2>
+          <h4>servings</h4>
+          <input type="number" name="servings" value="0" />
+          <h4>serving weight</h4>
+          <input type="number" name="serving_weight" value="0" />
+          <h4>calories</h4>
+          <input type="number" name="calories" value="0" />
+          <hr />
+
+          <h4>ala_fatty_acid</h4>
+          <input type="number" name="ala_fatty_acid" value="0" />
+
+          <h4>alanine</h4>
+          <input type="number" name="alanine" value="0" />
+
+          <h4>alcohol</h4>
+          <input type="number" name="alcohol" value="0" />
+
+          <h4>alpha_carotene</h4>
+          <input type="number" name="alpha_carotene" value="0" />
+
+          <h4>arginine</h4>
+          <input type="number" name="arginine" value="0" />
+
+          <h4>aspartic_acid</h4>
+          <input type="number" name="aspartic_acid" value="0" />
+
+          <h4>beta_carotene</h4>
+          <input type="number" name="beta_carotene" value="0" />
+
+          <h4>betaine</h4>
+          <input type="number" name="betaine" value="0" />
+
+          <h4>caffeine</h4>
+          <input type="number" name="caffeine" value="0" />
+
+          <h4>calcium</h4>
+          <input type="number" name="calcium" value="0" />
+
+          <h4>calories</h4>
+          <input type="number" name="calories" value="0" />
+
+          <h4>carbs</h4>
+          <input type="number" name="carbs" value="0" />
+
+          <h4>cholesterol</h4>
+          <input type="number" name="cholesterol" value="0" />
+
+          <h4>choline</h4>
+          <input type="number" name="choline" value="0" />
+
+          <h4>copper</h4>
+          <input type="number" name="copper" value="0" />
+
+          <h4>cystine</h4>
+          <input type="number" name="cystine" value="0" />
+
+          <h4>dha_fatty_acid</h4>
+          <input type="number" name="dha_fatty_acid" value="0" />
+
+          <h4>dpa_fatty_acid</h4>
+          <input type="number" name="dpa_fatty_acid" value="0" />
+
+          <h4>epa_fatty_acid</h4>
+          <input type="number" name="epa_fatty_acid" value="0" />
+
+          <h4>fats</h4>
+          <input type="number" name="fats" value="0" />
+
+          <h4>fiber</h4>
+          <input type="number" name="fiber" value="0" />
+
+          <h4>fluoride</h4>
+          <input type="number" name="fluoride" value="0" />
+
+          <h4>folate</h4>
+          <input type="number" name="folate" value="0" />
+
+          <h4>fructose</h4>
+          <input type="number" name="fructose" value="0" />
+
+          <h4>fruit_servings</h4>
+          <input type="number" name="fruit_servings" value="0" />
+
+          <h4>galactose</h4>
+          <input type="number" name="galactose" value="0" />
+
+          <h4>glucose</h4>
+          <input type="number" name="glucose" value="0" />
+
+          <h4>glutamic_acid</h4>
+          <input type="number" name="glutamic_acid" value="0" />
+
+          <h4>glycine</h4>
+          <input type="number" name="glycine" value="0" />
+
+          <h4>histidine</h4>
+          <input type="number" name="histidine" value="0" />
+
+          <h4>hydroxyproline</h4>
+          <input type="number" name="hydroxyproline" value="0" />
+
+          <h4>iron</h4>
+          <input type="number" name="iron" value="0" />
+
+          <h4>isoleucine</h4>
+          <input type="number" name="isoleucine" value="0" />
+
+          <h4>lactose</h4>
+          <input type="number" name="lactose" value="0" />
+
+          <h4>leucine</h4>
+          <input type="number" name="leucine" value="0" />
+
+          <h4>lycopene</h4>
+          <input type="number" name="lycopene" value="0" />
+
+          <h4>lysine</h4>
+          <input type="number" name="lysine" value="0" />
+
+          <h4>magnesium</h4>
+          <input type="number" name="magnesium" value="0" />
+
+          <h4>maltose</h4>
+          <input type="number" name="maltose" value="0" />
+
+          <h4>manganese</h4>
+          <input type="number" name="manganese" value="0" />
+
+          <h4>methionine</h4>
+          <input type="number" name="methionine" value="0" />
+
+          <h4>monounsaturated_fats</h4>
+          <input type="number" name="monounsaturated_fats" value="0" />
+
+          <h4>niacin</h4>
+          <input type="number" name="niacin" value="0" />
+
+          <h4>pantothenic_acid</h4>
+          <input type="number" name="pantothenic_acid" value="0" />
+
+          <h4>phenylalanine</h4>
+          <input type="number" name="phenylalanine" value="0" />
+
+          <h4>phosphorus</h4>
+          <input type="number" name="phosphorus" value="0" />
+
+          <h4>polyunsaturated_fats</h4>
+          <input type="number" name="polyunsaturated_fats" value="0" />
+
+          <h4>potassium</h4>
+          <input type="number" name="potassium" value="0" />
+
+          <h4>price</h4>
+          <input type="number" name="price" value="0" />
+
+          <h4>proline</h4>
+          <input type="number" name="proline" value="0" />
+
+          <h4>proteins</h4>
+          <input type="number" name="proteins" value="0" />
+
+          <h4>retinol</h4>
+          <input type="number" name="retinol" value="0" />
+
+          <h4>riboflavin</h4>
+          <input type="number" name="riboflavin" value="0" />
+
+          <h4>saturated_fats</h4>
+          <input type="number" name="saturated_fats" value="0" />
+
+          <h4>selenium</h4>
+          <input type="number" name="selenium" value="0" />
+
+          <h4>serine</h4>
+          <input type="number" name="serine" value="0" />
+
+          <h4>sodium</h4>
+          <input type="number" name="sodium" value="0" />
+
+          <h4>starch</h4>
+          <input type="number" name="starch" value="0" />
+
+          <h4>sucrose</h4>
+          <input type="number" name="sucrose" value="0" />
+
+          <h4>sugar</h4>
+          <input type="number" name="sugar" value="0" />
+
+          <h4>theobromine</h4>
+          <input type="number" name="theobromine" value="0" />
+
+          <h4>thiamine</h4>
+          <input type="number" name="thiamine" value="0" />
+
+          <h4>threonine</h4>
+          <input type="number" name="threonine" value="0" />
+
+          <h4>total_omega_3</h4>
+          <input type="number" name="total_omega_3" value="0" />
+
+          <h4>total_omega_6</h4>
+          <input type="number" name="total_omega_6" value="0" />
+
+          <h4>trans_fats</h4>
+          <input type="number" name="trans_fats" value="0" />
+
+          <h4>tryptophan</h4>
+          <input type="number" name="tryptophan" value="0" />
+
+          <h4>tyrosine</h4>
+          <input type="number" name="tyrosine" value="0" />
+
+          <h4>valine</h4>
+          <input type="number" name="valine" value="0" />
+
+          <h4>veggie_servings</h4>
+          <input type="number" name="veggie_servings" value="0" />
+
+          <h4>vit_a</h4>
+          <input type="number" name="vit_a" value="0" />
+
+          <h4>vit_a_iu</h4>
+          <input type="number" name="vit_a_iu" value="0" />
+
+          <h4>vit_b12</h4>
+          <input type="number" name="vit_b12" value="0" />
+
+          <h4>vit_b6</h4>
+          <input type="number" name="vit_b6" value="0" />
+
+          <h4>vit_c</h4>
+          <input type="number" name="vit_c" value="0" />
+
+          <h4>vit_d</h4>
+          <input type="number" name="vit_d" value="0" />
+
+          <h4>vit_d2</h4>
+          <input type="number" name="vit_d2" value="0" />
+
+          <h4>vit_d3</h4>
+          <input type="number" name="vit_d3" value="0" />
+
+          <h4>vit_d_iu</h4>
+          <input type="number" name="vit_d_iu" value="0" />
+
+          <h4>vit_e</h4>
+          <input type="number" name="vit_e" value="1" />
+
+          <h4>vit_k</h4>
+          <input type="number" name="vit_k" value="0" />
+
+          <h4>water</h4>
+          <input type="number" name="water" value="0" />
+
+          <h4>zinc</h4>
+          <input type="number" name="zinc" value="0" />
+        </div>
+      </div>
+    </form>
+  </div>
+  <script src="/js/edit-recipe.js"></script>
+</body>
+
 </html>
