@@ -1,4 +1,4 @@
-let production = false;
+let production = true;
 const baseUrl = production
   ? "https://mealplanner-86af.onrender.com"
   : "localhost:3000";
