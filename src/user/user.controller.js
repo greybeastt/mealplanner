@@ -1,7 +1,7 @@
 const createHttpError = require("http-errors");
 const Recipe = require("../model/receipe.model");
 const logger = require("../utils/logger");
-const error_margin = 50;
+const error_margin = 30;
 
 const meal_query = {
   breakfast: { options: { is_breakfast: true, breakfast: true } },
@@ -89,8 +89,8 @@ const getRecipies = async (options, calories, type, order) => {
     },
     ...options,
   });
-  if (recipes.length === 0) {
-    return getRecipies(options, calories + 50, type, order);
+  if (recipes.length < 2) {
+    return getRecipies(options, calories + Math.random() * 100, type, order);
   }
   let select_random = [];
   let recipes_length = recipes.length;
@@ -104,6 +104,7 @@ const getRecipies = async (options, calories, type, order) => {
 
   select_random.push(recipes[first_idx]);
   select_random.push(recipes[second_idx]);
+  logger.info(`${type} ${recipes.length}`);
 
   return {
     type,
@@ -120,15 +121,19 @@ exports.generatePlan = [
       let order = 1;
 
       const plan = plans[numberOfMeals];
+
+      const snacks = Math.max(numberOfMeals - 3, 0);
+      const snack_calories = calories * 0.08;
       let meal_calories =
-        numberOfMeals > 3
-          ? (calories * (1 - 0.1 * numberOfMeals)) / numberOfMeals
-          : calories / numberOfMeals;
+        (calories - snack_calories * snacks) / Math.min(numberOfMeals, 3);
+
       let promises = plan.map((meal) => {
-        if (meal === "snack") {
-          return getRecipies(meal_query[meal].options, calories * 0.1, meal, order++);
-        }
-        return getRecipies(meal_query[meal].options, meal_calories, meal, order++);
+        return getRecipies(
+          meal_query[meal].options,
+          meal === "snack" ? snack_calories : meal_calories,
+          meal,
+          order++
+        );
       });
 
       let ans = await Promise.all(promises);

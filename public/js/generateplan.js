@@ -1,7 +1,7 @@
 let production = true;
-const baseUrl = production
+const baseUrl = !production
   ? "https://mealplanner-86af.onrender.com"
-  : "localhost:3000";
+  : "http://localhost:3000";
 const mealColumn = document.querySelector(".meal-row");
 const modal = document.querySelector(".modal");
 const generateButton = document.getElementById("generateButton");
@@ -79,18 +79,19 @@ const createModal = (recipe) => {
 };
 
 const generateBtnHandler = async () => {
-  const calories = document.getElementById("cal_input").value || 0;
+  const calories = document.getElementById("cal_input").value || 1000;
   const numberOfMeals =
-    document.getElementById("num_meals_selector").value || 0;
+    document.getElementById("num_meals_selector").value || 2;
 
   try {
     const res = await fetch(`${baseUrl}/api/v1/${numberOfMeals}/${calories}`);
     if (!res.ok) {
-      throw new Error(`Error: ${res.statusText}`);
+      throw new Error(`Error: ${(await res.json()).error}`);
     }
     const data = await res.json();
     mealColumn.innerHTML = "";
 
+    let chart_calories = 0;
     data.forEach((meal) => {
       const mealContainer = document.createElement("div");
       mealContainer.classList.add("meal");
@@ -125,11 +126,14 @@ const generateBtnHandler = async () => {
       });
 
       pTag.innerText = `${Math.round(totalCalories)} Calories`;
-
+      chart_calories += totalCalories;
+      document.getElementById("chart-calories").innerText = "xxx Calories";
       mealColumn.appendChild(mealContainer);
     });
+    document.getElementById("chart-calories").innerHTML =
+      Math.round(chart_calories) + " Calories";
   } catch (err) {
-    alert(`Failed to generate meals: ${err.message}`);
+    alert(`${err.message}`);
   }
 };
 
