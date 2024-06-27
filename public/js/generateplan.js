@@ -1,5 +1,5 @@
 let production = true;
-const baseUrl = !production
+const baseUrl = production
   ? "https://mealplanner-86af.onrender.com"
   : "http://localhost:3000";
 const mealColumn = document.querySelector(".meal-row");
