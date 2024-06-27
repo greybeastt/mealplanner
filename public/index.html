@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meal Planner</title>
-    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/chart.css" />
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
 
   <body>
@@ -17,7 +20,7 @@
     <!-- INTRO -->
     <div class="page-intro">
       <h1>Lorem Ipsum</h1>
-      <hp>
+      <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus
         sapiente quam, fuga, inventore eos officia cupiditate magni molestiae
         dicta praesentium quas alias nihil reiciendis adipisci culpa provident
@@ -62,12 +65,185 @@
         </button>
       </div>
 
+      <!-- INSIGHTS -->
+      <div
+        class="container"
+        style="
+          background-color: transparent;
+          box-shadow: none;
+          margin: 10px;
+          justify-content: start;
+          padding: 0;
+        "
+      >
+        <div style="text-align: left; min-width: 32%">
+          <h2 style="margin: 5px">Today's Meal Plan</h2>
+        </div>
+        <!-- CHART -->
+        <div class="chart-container" style="position: relative">
+          <canvas id="myPieChart"></canvas>
+          <h2>1830 Calories</h2>
+        </div>
+      </div>
+
       <!-- MEAL SECTION -->
       <div class="meal-row">
-        <!-- Add more meal sections if needed -->
+        <div class="meal">
+          <div class="meal-header">
+            <h3>lunch</h3>
+            <p>930 Calories</p>
+          </div>
+          <div class="wrapper">
+            <div class="meal-item">
+              <img
+                src="https://images.eatthismuch.com/img/279825_sekharb_fa3585bd-2b52-4e0e-b76b-509e226b06dc.png"
+                alt="Tuna Apple Salad"
+              />
+              <div class="meal-details">
+                <h4>Tuna Apple Salad</h4>
+                <p>1 Serving</p>
+              </div>
+            </div>
+            <div class="meal-modal">
+              <h1>Tuna Apple Salad</h1>
+              <h3>5 min prep, 0 min cook</h3>
+              <hr />
+              <table>
+                <tr class="row1">
+                  <th>Calories</th>
+                  <th>481.79</th>
+                </tr>
+                <tr class="row2">
+                  <th>Carbs</th>
+                  <th>29.42</th>
+                </tr>
+                <tr class="row3">
+                  <th>Fats</th>
+                  <th>12.95</th>
+                </tr>
+                <tr class="row4">
+                  <th>Proteins</th>
+                  <th>65.33</th>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="wrapper">
+            <div class="meal-item">
+              <img
+                src="https://images.eatthismuch.com/img/717760_Yesso1966_5f1ae56b-350e-4c49-892d-d118e8c0c4e4.png"
+                alt="Almond Butter Berry Protein Smoothie"
+              />
+              <div class="meal-details">
+                <h4>Almond Butter Berry Protein Smoothie</h4>
+                <p>1 Serving</p>
+              </div>
+            </div>
+            <div class="meal-modal">
+              <h1>Almond Butter Berry Protein Smoothie</h1>
+              <h3>5 min prep, 0 min cook</h3>
+              <hr />
+              <table>
+                <tr class="row1">
+                  <th>Calories</th>
+                  <th>448.21</th>
+                </tr>
+                <tr class="row2">
+                  <th>Carbs</th>
+                  <th>34.75</th>
+                </tr>
+                <tr class="row3">
+                  <th>Fats</th>
+                  <th>12.14</th>
+                </tr>
+                <tr class="row4">
+                  <th>Proteins</th>
+                  <th>53.78</th>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="meal">
+          <div class="meal-header">
+            <h3>dinner</h3>
+            <p>912 Calories</p>
+          </div>
+          <div class="wrapper">
+            <div class="meal-item">
+              <img
+                src="https://images.eatthismuch.com/img/33530_tabitharwheeler_7a3fb23e-4ed0-465e-96ab-ca5e40a303f5.jpg"
+                alt="Grilled turkey sandwich"
+              />
+              <div class="meal-details">
+                <h4>Grilled turkey sandwich</h4>
+                <p>1 Serving</p>
+              </div>
+            </div>
+            <div class="meal-modal">
+              <h1>Grilled turkey sandwich</h1>
+              <h3>5 min prep, 10 min cook</h3>
+              <hr />
+              <table>
+                <tr class="row1">
+                  <th>Calories</th>
+                  <th>425.44</th>
+                </tr>
+                <tr class="row2">
+                  <th>Carbs</th>
+                  <th>34.17</th>
+                </tr>
+                <tr class="row3">
+                  <th>Fats</th>
+                  <th>18.92</th>
+                </tr>
+                <tr class="row4">
+                  <th>Proteins</th>
+                  <th>29.9</th>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="wrapper">
+            <div class="meal-item">
+              <img
+                src="https://images.eatthismuch.com/images/recipe_image_placeholder.jpg"
+                alt="Red-Leaf Lettuce with Shallot Vinaigrette"
+              />
+              <div class="meal-details">
+                <h4>Red-Leaf Lettuce with Shallot Vinaigrette</h4>
+                <p>6 Serving</p>
+              </div>
+            </div>
+            <div class="meal-modal">
+              <h1>Red-Leaf Lettuce with Shallot Vinaigrette</h1>
+              <h3>10 min prep, 20 min cook</h3>
+              <hr />
+              <table>
+                <tr class="row1">
+                  <th>Calories</th>
+                  <th>486.38</th>
+                </tr>
+                <tr class="row2">
+                  <th>Carbs</th>
+                  <th>9.48</th>
+                </tr>
+                <tr class="row3">
+                  <th>Fats</th>
+                  <th>48.58</th>
+                </tr>
+                <tr class="row4">
+                  <th>Proteins</th>
+                  <th>4.72</th>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
     <script src="/js/generateplan.js"></script>
+    <script src="/js/chart.js"></script>
   </body>
 </html>

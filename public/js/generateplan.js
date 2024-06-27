@@ -1,4 +1,4 @@
-let production = true;
+let production = false;
 const baseUrl = production
   ? "https://mealplanner-86af.onrender.com"
   : "localhost:3000";
@@ -43,7 +43,7 @@ const createMealItem = (recipe) => {
 
 const createModal = (recipe) => {
   const modalItem = document.createElement("div");
-  modalItem.classList.add("modal");
+  modalItem.classList.add("meal-modal");
 
   const title = document.createElement("h1");
   title.innerText = recipe.food_name;

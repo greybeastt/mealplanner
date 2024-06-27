@@ -1,0 +1,49 @@
+.image-container {
+  position: relative;
+  width: 300px; /* Adjust as needed */
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.modal {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+}
+
+.modal img {
+  width: 100%; /* Ensure the modal image takes full width */
+}
+.chart-container {
+  padding: 10px 10px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  flex-wrap: wrap;
+
+  height: 40px;
+  min-width: 60%;
+
+  font-size: 12px;
+  font-weight: lighter;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.chart-container canvas {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px ;
+}
+.chart-container h2 {
+  padding: 0;
+  margin: 0;
+}
