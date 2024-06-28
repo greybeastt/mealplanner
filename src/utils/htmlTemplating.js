@@ -30,7 +30,8 @@ module.exports = class Templator {
           src="${
             "https://images.eatthismuch.com/" +
             ingredient.food.default_image.image
-          }" alt="Tortillas">
+          }"
+          alt="ingredient">
         <div class="text">
           <div class="title">${ingredient.food.food_name}</div>
           <div class="subtitle">${ingredient.food.description}</div>
@@ -75,17 +76,14 @@ module.exports = class Templator {
     </div>
 
     <!-- IMAGE -->
-    <div class="header">
-      <img
-        src="https://images.eatthismuch.com/${default_image.image}"
-        alt="Header Image"
-      />
-    </div>
 
     <!-- 1. CONTAINER -->
     <div class="container">
       <div class="container-wrapper">
         <div class="left-part">
+      <div class="header"> <img src="https://images.eatthismuch.com/${
+        default_image.image
+      }" alt="Header Image" /> </div>
           <!-- 1.1. time card  -->
           <div class="stats-card">
             <div class="time-item">

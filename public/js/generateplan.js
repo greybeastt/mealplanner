@@ -1,4 +1,4 @@
-let production = false;
+let production = true;
 const baseUrl = production
   ? "https://mealplanner-86af.onrender.com"
   : "http://localhost:3000";
@@ -23,7 +23,7 @@ const createMealItem = (recipe) => {
   mealItem.classList.add("meal-item");
 
   const image = document.createElement("img");
-  image.src = `https://images.eatthismuch.com/${recipe.default_image[0].image}`;
+  image.src = `https://images.eatthismuch.com/${recipe.default_image.image}`;
   image.alt = recipe.food_name;
 
   const mealDetails = document.createElement("div");
@@ -133,6 +133,7 @@ const generateBtnHandler = async () => {
     document.getElementById("chart-calories").innerHTML =
       Math.round(chart_calories) + " Calories";
   } catch (err) {
+    throw err;
     alert(`${err.message}`);
   }
 };

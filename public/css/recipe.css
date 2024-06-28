@@ -37,12 +37,15 @@ body {
 }
 
 .header {
+  width: 400px;
   position: relative; /* Position relative to allow absolute positioning of overlay text */
-  margin: 0px 16px;
+  margin: 8px 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 5px;
 }
 
 .header img {
-  border-radius: 1px;
   width: 100%; /* Ensure the image fills the entire width of its parent container */
   display: block; /* Ensure the image behaves as a block-level element */
   object-fit: cover;
@@ -58,6 +61,11 @@ body {
   display: flex; /* Display children horizontally */
   justify-content: space-around; /* Spreads items horizontally */
   max-width: 70%;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.stats-card:hover {
+  transform: translateY(-1px); /* Adjust as needed */
 }
 
 .time-item {

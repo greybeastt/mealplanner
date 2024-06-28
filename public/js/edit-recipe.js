@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const newIngredient = document.createElement("div");
     newIngredient.classList.add("ingredient-item");
     newIngredient.innerHTML = `
-      <input type="text" name="ingredients[${index}][food_name]" placeholder="Name">
+      <input type="text" name="ingredients[${index}][food_name]" placeholder="Name" >
       <input type="text" name="ingredients[${index}][description]" placeholder="Description">
       <input type="number" name="ingredients[${index}][amount]" placeholder="Amount">
       <input type="text" name="ingredients[${index}][weight_description]" placeholder="Weight Description">
@@ -70,19 +70,19 @@ const formHandler = async (e) => {
     }
   });
 
-  // // Collect ingredients
-  // form.querySelectorAll(".ingredient-item").forEach((item) => {
-  //   const ingredient = {
-  //     name: item.querySelector("input[name$='[food_name]']").value,
-  //     description: item.querySelector("input[name$='[description]']").value,
-  //     amount: item.querySelector("input[name$='[amount]']").value,
-  //     weight_description: item.querySelector("input[name$='[weight_description]']").value,
-  //     weight_grams: item.querySelector("input[name$='[weight_grams]']").value,
-  //   };
-  //   if (ingredient.name) {
-  //     recipeData.ingredients.push(ingredient);
-  //   }
-  // });
+  // Collect ingredients
+  form.querySelectorAll(".ingredient-item").forEach((item) => {
+    const ingredient = {
+      name: item.querySelector("input[name$='[food_name]']").value,
+      description: item.querySelector("input[name$='[description]']").value,
+      amount: item.querySelector("input[name$='[amount]']").value,
+      weight_description: item.querySelector("input[name$='[weight_description]']").value,
+      weight_grams: item.querySelector("input[name$='[weight_grams]']").value,
+    };
+    if (ingredient.name) {
+      recipeData.ingredients.push(ingredient);
+    }
+  });
 
   // Collect nutrition facts
   form.querySelectorAll(".nutrition-facts input").forEach((input) => {

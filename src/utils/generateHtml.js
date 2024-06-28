@@ -4,11 +4,27 @@ exports.generateEditRecipeHtml = (recipeData) => {
   const ingredientsHTML = ingredients
     .map(
       (ingredient, index) => `
-      <div class="ingredient-item">
-        <input type="text" name="ingredients[${index}][food_name]" value="${ingredient.food.food_name}" />
-        <input type="text" name="ingredients[${index}][description]" placeholder="Description">
-        <input type="text" name="ingredients[${index}][units]" placeholder="Units">
-        <input type="number" name="ingredients[${index}][grams]" placeholder="Grams">
+      <div class="ingredient-item" style="min-width:70%">
+      <lable style="padding-right:5px">Name</lable>
+      <input type="text" name="ingredients[${index}][food_name]" placeholder="Name" value = "${
+        ingredient.food.food_name
+      }" >
+      <lable style="padding-right:5px">Description</lable>
+      <input type="text" name="ingredients[${index}][description]" placeholder="Description" value = "${
+        ingredient.food.description
+      }">
+      <lable style="padding-right:5px">Amount</lable>
+      <input type="number" name="ingredients[${index}][amount]" placeholder="Amount" value = "${
+        ingredient.amount
+      }">
+      <lable style="padding-right:5px">Weight Description </lable>
+      <input type="text" name="ingredients[${index}][weight_description]" placeholder="Weight Description" value = "${
+        ingredient.food.weights[ingredient.units].description
+      }">
+      <lable style="padding-right:5px">Weight (Grams)</lable>
+      <input type="number" name="ingredients[${index}][weight_grams]" placeholder="Weight (Grams)" value = "${
+        ingredient.food.weights[ingredient.units].grams * ingredient.amount
+      }">
       </div>
     `
     )
@@ -88,16 +104,15 @@ exports.generateEditRecipeHtml = (recipeData) => {
           </div>
           <!-- 1.2. Nutrition div -->
           <div class="nutrition-facts">
-          <h2>Nutrition Facts</h2>
-${Object.entries(nutrition)
-  .map(
-    ([key, val]) => `
-      <h4>${key}</h4>
-      <input type="text" name="${key}" value="${val}" />
-    `
-  )
-  .join("")}
-
+            <h2>Nutrition Facts</h2>
+            ${Object.entries(nutrition)
+              .map(
+                ([key, val]) => `
+                <h4>${key}</h4>
+            <input type="number" name="${key}" value="${val}" />
+                `
+              )
+              .join("")}
               <button type="button" class="redbtn" id="delete-recipe-button">Delete Recipe</button>
             </div>
           </div>
@@ -109,3 +124,12 @@ ${Object.entries(nutrition)
 </html>
   `;
 };
+//           <h2>Nutrition Facts</h2>
+// ${Object.entries(nutrition)
+//   .map(
+//     ([key, val]) => `
+//       <h4>${key}</h4>
+//       <input type="text" name="${key}" value="${val}" />
+//     `
+//   )
+//   .join("")}

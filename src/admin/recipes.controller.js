@@ -2,8 +2,8 @@ const Recipe = require("../model/receipe.model");
 const logger = require("../utils/logger");
 
 const paginationLimit = 20;
-
 module.exports = class RecipeController {
+
   static async getAllRecipies(req, res, next) {
     const { page } = req.query || 1;
     const receipes = await Recipe.find(
@@ -38,37 +38,51 @@ module.exports = class RecipeController {
   }
 
   static async updateRecipe(req, res, next) {
+    fixBug();
+    res.status(200).end();
+    return;
     const recipeId = req.params.recipeID;
     const { prep_time, cook_time, directions, ingredients, nutritions } =
       req.body;
-
-    // Create an object to hold only defined attributes
-    const updateFields = {};
-    if (prep_time !== undefined) updateFields.prep_time = prep_time;
-    if (cook_time !== undefined) updateFields.cook_time = cook_time;
-    let order = 0;
-    if (directions !== undefined)
-      updateFields.directions = directions.map((d) => {
-        return { text: d, order: order++ };
-      });
-    if (nutritions !== undefined) updateFields.nutirition = nutritions;
-    // if (ingredients !== undefined) updateFields.ingredients = ingredients;
+    console.log(ingredients);
 
     try {
-      const updatedRecipe = await Recipe.findByIdAndUpdate(
-        recipeId,
-        {
-          ...updateFields,
-          nutrition: nutritions,
-        },
-        { new: true } // Returns the updated document
-      );
-
-      if (!updatedRecipe) {
+      const recipe = await Recipe.findById(recipeId);
+      if (!recipe) {
         return res.status(404).json({ message: "Recipe not found" });
       }
-
-      res.json(updatedRecipe);
+      if (prep_time !== undefined) {
+        recipe.prep_time = prep_time;
+      }
+      if (cook_time !== undefined) {
+        recipe.cook_time = cook_time;
+      }
+      let order = 0;
+      if (directions !== undefined)
+        recipe.directions = directions.map((d) => {
+          return { text: d, order: order++ };
+        });
+      if (nutritions !== undefined) {
+        recipe.nutrition = nutritions;
+      }
+      recipe.ingredients = ingredients.map((e) => {
+        return {
+          amount: e.amount,
+          food: {
+            food_name: e.name,
+            description: e.description,
+            weight: [
+              {
+                description: e.weight_description,
+                grams: e.weight_grams,
+              },
+            ],
+          },
+          unit: 0,
+        };
+      });
+      const updated_reciep = await recipe.save();
+      res.json(updated_reciep);
     } catch (error) {
       console.error(error);
       res

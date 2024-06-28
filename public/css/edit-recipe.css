@@ -11,6 +11,7 @@ body {
 
 .left-part {
   flex: 1;
+  min-width: 70%;
 }
 
 .stats-card {
@@ -169,4 +170,8 @@ button.redbtn:hover {
   .time-item {
     margin-bottom: 10px;
   }
+}
+
+label {
+  font-size: 2px;
 }
