@@ -1,7 +1,6 @@
 const {
   generateRecipeHtml,
   generateEditRecipeHtml,
-  not_found,
 } = require("../utils/generateHtml.js");
 
 const { generateAccessToken } = require("../utils/jwt.js");
@@ -9,6 +8,7 @@ const logger = require("../utils/logger.js").default;
 const Recipe = require("../model/receipe.model.js");
 const createHttpError = require("http-errors");
 const { from_public } = require("../utils/utils.js");
+const Templator = require("../utils/htmlTemplating.js");
 
 exports.auth = (req, res, next) => {
   const { username, password } = req.body;
@@ -29,9 +29,11 @@ exports.createview = async (req, res, next) => {
     if (!recipe) {
       throw Error("not found");
     }
-    res.send(generateRecipeHtml(recipe));
+
+    res.send(Templator.displayMeal(recipe));
   } catch (err) {
-    res.redirect("http://localhost:3000/notfound.html");
+    throw err;
+    // res.redirect("http://localhost:3000/notfound.html");
   }
 };
 

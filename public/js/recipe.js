@@ -1,5 +1,7 @@
 const editBtn = document.getElementById("btn.edit");
 const deleteBtn = document.getElementById("btn.delete");
+const nutritionBtn = document.getElementById("nutrition.btn");
+const nutritionTable = document.getElementById("nutrition.table"); // Corrected variable name
 
 const editHandler = (e) => {
   const pathname = window.location.pathname.split("/");
@@ -9,11 +11,11 @@ const editHandler = (e) => {
 };
 
 const deleteHandler = async (e) => {
-  let reciepeId = window.location.pathname.split("/").at(-1);
-  console.log(reciepeId);
+  let recipeId = window.location.pathname.split("/").at(-1);
+  console.log(recipeId);
   if (confirm("Are you sure you want to delete this recipe?")) {
     const response = await fetch(
-      `http://localhost:3000/admin/recipe/${reciepeId}`,
+      `http://localhost:3000/admin/recipe/${recipeId}`,
       {
         method: "delete",
       }
@@ -27,5 +29,13 @@ const deleteHandler = async (e) => {
     }
   }
 };
+
 editBtn.addEventListener("click", editHandler);
 deleteBtn.addEventListener("click", deleteHandler);
+nutritionBtn.addEventListener("click", () => {
+  if (nutritionTable.style.display === "none") {
+    nutritionTable.style.display = "block";
+  } else {
+    nutritionTable.style.display = "none";
+  }
+});

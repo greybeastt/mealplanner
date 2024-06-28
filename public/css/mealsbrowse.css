@@ -1,5 +1,9 @@
 body {
+  background-color: #f9f9f9;
+  height: 100vh;
   margin: 0;
+  font-family: "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
 }
 .navbar {
   display: flex; /* Use flexbox for layout */
@@ -14,11 +18,17 @@ body {
   border-bottom: 1px solid black; /* Border style with color */
 }
 
-.navbar a {
-  margin: 0;
-  text-decoration: none; /* Remove underline from links */
-  color: inherit; /* Inherit text color */
-  font-size: 20px;
+.navbar {
+  width: 100%;
+  background-color: #1b1b25;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: start;
+}
+
+.navbar-brand img {
+  display: block;
+  margin: 0 auto;
 }
 
 .navbar a:hover {

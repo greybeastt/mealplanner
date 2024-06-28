@@ -14,7 +14,7 @@ const schema = new Schema(
     prep_time: Number,
     totat_time: Number,
     nutirition: Object,
-    default_image: [{ image: String, thumbnail: String }],
+    default_image: { image: String, thumbnail: String },
     fats: Number,
     calories: Number,
     directions: [{ text: String, order: Number }],
