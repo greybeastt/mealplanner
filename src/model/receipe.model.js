@@ -12,12 +12,13 @@ const schema = new Schema(
     cook_time: Number,
     wait_time: Number,
     prep_time: Number,
-    totat_time: Number,
-    nutirition: Object,
+    total_time: Number,
+    nutrition: {}, // Ensure this matches your intended structure for nutrition data
     default_image: { image: String, thumbnail: String },
     fats: Number,
     calories: Number,
     directions: [{ text: String, order: Number }],
+    meal_category: String,
   },
   { strict: false }
 );

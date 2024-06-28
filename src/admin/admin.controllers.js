@@ -21,6 +21,19 @@ exports.auth = (req, res, next) => {
   const token = generateAccessToken({}, "1d");
   return res.json({ message: "Login successful", token: token });
 };
+exports.searchFooByName = async (name) => {
+  try {
+    const regex = new RegExp(name, "i"); // 'i' for case-insensitive search
+
+    const result = await Foo.find({ foo_name: regex });
+
+    console.log("Search result:", result);
+    return result;
+  } catch (err) {
+    console.error("Error searching in MongoDB:", err);
+    return [];
+  }
+};
 
 exports.createview = async (req, res, next) => {
   const recipieID = req.params.recipeID;

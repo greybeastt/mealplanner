@@ -1,4 +1,5 @@
 const recipeTable = document.createElement("table");
+recipeTable.id = "reciepeTable";
 const paginationContainer = document.createElement("div");
 paginationContainer.classList.add("pagination-controls");
 
@@ -52,24 +53,34 @@ const fetchdata = async () => {
   const headRow = document.createElement("tr");
 
   const imageHead = document.createElement("th");
+
   imageHead.textContent = "Image";
   headRow.appendChild(imageHead);
 
+  // const nameHead = document.createElement("th");
+  // nameHead.onclick = "sortTable(1)";
+  // nameHead.textContent = "Recipe Name";
+  // headRow.appendChild(nameHead);
   const nameHead = document.createElement("th");
+
   nameHead.textContent = "Recipe Name";
   headRow.appendChild(nameHead);
 
   const caloriesHead = document.createElement("th");
-  caloriesHead.textContent = "Calories";
+  caloriesHead.textContent = "Category";
   headRow.appendChild(caloriesHead);
 
-  const fatsHead = document.createElement("th");
-  fatsHead.textContent = "Fats";
-  headRow.appendChild(fatsHead);
+  // const caloriesHead = document.createElement("th");
+  // caloriesHead.textContent = "Calories";
+  // headRow.appendChild(caloriesHead);
 
-  const proteinsHead = document.createElement("th");
-  proteinsHead.textContent = "Proteins";
-  headRow.appendChild(proteinsHead);
+  // const fatsHead = document.createElement("th");
+  // fatsHead.textContent = "Fats";
+  // headRow.appendChild(fatsHead);
+
+  // const proteinsHead = document.createElement("th");
+  // proteinsHead.textContent = "Proteins";
+  // headRow.appendChild(proteinsHead);
 
   tableHead.appendChild(headRow);
   recipeTable.appendChild(tableHead);
@@ -104,19 +115,24 @@ const fetchdata = async () => {
     nameCell.appendChild(recipeLink);
     row.appendChild(nameCell);
 
-    const caloriesCell = document.createElement("td");
-    caloriesCell.setAttribute("data-label", "Calories");
-    caloriesCell.textContent = Math.round(recipe.calories * 10) / 10 || 0;
-    row.appendChild(caloriesCell);
+    // const caloriesCell = document.createElement("td");
+    // caloriesCell.setAttribute("data-label", "Calories");
+    // caloriesCell.textContent = Math.round(recipe.calories * 10) / 10 || 0;
+    // row.appendChild(caloriesCell);
 
-    const fatsCell = document.createElement("td");
-    fatsCell.setAttribute("data-label", "Fats");
-    fatsCell.textContent = Math.round(recipe.fats * 10) / 10 || 0;
-    row.appendChild(fatsCell);
+    // const fatsCell = document.createElement("td");
+    // fatsCell.setAttribute("data-label", "Fats");
+    // fatsCell.textContent = Math.round(recipe.fats * 10) / 10 || 0;
+    // row.appendChild(fatsCell);
+
+    // const proteinsCell = document.createElement("td");
+    // proteinsCell.setAttribute("data-label", "Proteins");
+    // proteinsCell.textContent = Math.round(recipe.proteins * 10) / 10 || 0;
+    // row.appendChild(proteinsCell);
 
     const proteinsCell = document.createElement("td");
     proteinsCell.setAttribute("data-label", "Proteins");
-    proteinsCell.textContent = Math.round(recipe.proteins * 10) / 10 || 0;
+    proteinsCell.textContent = recipe.meal_category || "ff";
     row.appendChild(proteinsCell);
 
     tableBody.appendChild(row);

@@ -24,24 +24,35 @@ module.exports = class Templator {
       .join("");
 
     const ingredientsHTML = ingredients
-      .map(
-        (ingredient) => `<div class="container ingredient">
+      .map((ingredient) => {
+        return `<div class="container ingredient">
         <img width="50" height="50"
- src="${
-   "https://images.eatthismuch.com/" + ingredient.food.default_image.image
- }" alt="Tortillas">
+          src="${
+            "https://images.eatthismuch.com/" +
+            ingredient.food.default_image.image
+          }" alt="Tortillas">
         <div class="text">
-            <div class="title">${ingredient.food.food_name}</div>
-            <div class="subtitle">Ready-to-bake or -fry, flour</div>
-        </div>
-        <div class="details">
-            <div>${ingredient.food.weights[ingredient.units].description}</div>
-            <div>${ingredient.food.weights[ingredient.units].grams}</div>
-        </div>
-    </div> 
-    </hr>
-    `
-      )
+          <div class="title">${ingredient.food.food_name}</div>
+          <div class="subtitle">${ingredient.food.description}</div>
+          </div>
+          <div class="details">
+              <div>
+              ${
+                ingredient.food.weights[ingredient.units].amount *
+                ingredient.amount
+              }
+              ${ingredient.food.weights[ingredient.units].description}</div>
+              <div>
+              ${
+                ingredient.food.weights[ingredient.units].grams *
+                ingredient.amount
+              } grams
+       </div>
+          </div>
+        </div> 
+        </hr>
+    `;
+      })
       .join("");
 
     const directionsHTML = directions

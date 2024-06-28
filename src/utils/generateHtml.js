@@ -1,15 +1,18 @@
 exports.generateEditRecipeHtml = (recipeData) => {
-  const { food_name, ingredients, directions, default_image, nutrition } = recipeData;
+  const { food_name, ingredients, directions, default_image, nutrition } =
+    recipeData;
   const ingredientsHTML = ingredients
     .map(
       (ingredient, index) => `
       <div class="ingredient-item">
         <input type="text" name="ingredients[${index}][food_name]" value="${ingredient.food.food_name}" />
+        <input type="text" name="ingredients[${index}][description]" placeholder="Description">
+        <input type="text" name="ingredients[${index}][units]" placeholder="Units">
+        <input type="number" name="ingredients[${index}][grams]" placeholder="Grams">
       </div>
     `
     )
     .join("");
-
   const directionsHTML = directions
     .map(
       (step, index) => `
@@ -55,11 +58,15 @@ exports.generateEditRecipeHtml = (recipeData) => {
             <div class="stats-card">
               <div class="time-item">
                 <h4>Prep Time</h4>
-                <input type="number" name="prep_time" value="${recipeData.prep_time}"/>
+                <input type="number" name="prep_time" value="${
+                  recipeData.prep_time
+                }"/>
               </div>
               <div class="time-item">
                 <h4>Cook Time</h4>
-                <input type="number" name="cook_time" value="${recipeData.cook_time}"/>
+                <input type="number" name="cook_time" value="${
+                  recipeData.cook_time
+                }"/>
               </div>
               <div class="time-item">
                 <h4>Total Time</h4>
@@ -81,15 +88,16 @@ exports.generateEditRecipeHtml = (recipeData) => {
           </div>
           <!-- 1.2. Nutrition div -->
           <div class="nutrition-facts">
-            <h2>Nutrition Facts</h2>
-            ${Object.entries(nutrition)
-      .map(
-        ([key, val]) => `
-                <h4>${key}</h4>
-            <input type="number" name="${key}" value="${val}" />
-                `
-      )
-      .join("")}
+          <h2>Nutrition Facts</h2>
+${Object.entries(nutrition)
+  .map(
+    ([key, val]) => `
+      <h4>${key}</h4>
+      <input type="text" name="${key}" value="${val}" />
+    `
+  )
+  .join("")}
+
               <button type="button" class="redbtn" id="delete-recipe-button">Delete Recipe</button>
             </div>
           </div>

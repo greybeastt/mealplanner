@@ -7,7 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const newIngredient = document.createElement("div");
     newIngredient.classList.add("ingredient-item");
     newIngredient.innerHTML = `
-      <input type="text" name="ingredients[${index}][food_name]" value="" />
+      <input type="text" name="ingredients[${index}][food_name]" placeholder="Name">
+      <input type="text" name="ingredients[${index}][description]" placeholder="Description">
+      <input type="number" name="ingredients[${index}][amount]" placeholder="Amount">
+      <input type="text" name="ingredients[${index}][weight_description]" placeholder="Weight Description">
+      <input type="number" name="ingredients[${index}][weight_grams]" placeholder="Weight (Grams)">
     `;
     ingredientsList.appendChild(newIngredient);
   });
@@ -47,36 +51,49 @@ document.addEventListener("DOMContentLoaded", () => {
 const formHandler = async (e) => {
   e.preventDefault();
 
-  const reciepeId = window.location.pathname.split("/").at(-1);
+  const recipeId = window.location.pathname.split("/").at(-1);
   const form = e.target;
   const formData = new FormData(form);
-  let recipeData = {};
+  let recipeData = {
+    prep_time: formData.get("prep_time"),
+    cook_time: formData.get("cook_time"),
+    directions: [],
+    ingredients: [],
+    nutritions: {},
+  };
 
-  recipeData.prep_time = formData.get("prep_time");
-  recipeData.cook_time = formData.get("cook_time");
-
-  recipeData.directions = [];
-  form
-    .querySelectorAll(".direction-item textarea")
-    .forEach((textarea, index) => {
-      if (textarea.value.trim() == "") {
-        return;
-      }
-      recipeData.directions.push(textarea.value.trim());
-    });
-
-  recipeData.ingredients = [];
-  form.querySelectorAll(".ingredient-item input").forEach((input, index) => {
-    recipeData.ingredients.push(input.value);
+  // Collect directions
+  form.querySelectorAll(".direction-item textarea").forEach((textarea) => {
+    const trimmedValue = textarea.value.trim();
+    if (trimmedValue) {
+      recipeData.directions.push(trimmedValue);
+    }
   });
 
-  recipeData.nutritions = {};
+  // // Collect ingredients
+  // form.querySelectorAll(".ingredient-item").forEach((item) => {
+  //   const ingredient = {
+  //     name: item.querySelector("input[name$='[food_name]']").value,
+  //     description: item.querySelector("input[name$='[description]']").value,
+  //     amount: item.querySelector("input[name$='[amount]']").value,
+  //     weight_description: item.querySelector("input[name$='[weight_description]']").value,
+  //     weight_grams: item.querySelector("input[name$='[weight_grams]']").value,
+  //   };
+  //   if (ingredient.name) {
+  //     recipeData.ingredients.push(ingredient);
+  //   }
+  // });
+
+  // Collect nutrition facts
   form.querySelectorAll(".nutrition-facts input").forEach((input) => {
-    recipeData.nutritions[input.name] = parseFloat(input.value);
+    if (input.value) {
+      recipeData.nutritions[input.name] = parseFloat(input.value) || 0;
+    }
   });
-  // Sending the data
+
+  // Send data to the server
   try {
-    const response = await fetch(`/admin/recipe/${reciepeId}`, {
+    const response = await fetch(`/admin/recipe/${recipeId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -85,15 +102,16 @@ const formHandler = async (e) => {
     });
 
     if (response.ok) {
-      // const result = await response.json();
+      console.log(recipeData);
       alert("Recipe updated successfully!");
       // Optionally redirect or update the UI
+      // window.location.href = `/admin/recipe/view/${recipeId}`;
     } else {
-      alert("Failed to update recipe.");
+      const errorData = await response.json();
+      alert(`Failed to update recipe: ${errorData.message || response.statusText}`);
     }
   } catch (error) {
     console.error("Error:", error);
     alert("An error occurred while updating the recipe.");
   }
-  // window.location.href = `/admin/recipe/view/${recipeId}`;
 };

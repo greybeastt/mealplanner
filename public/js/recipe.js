@@ -5,7 +5,7 @@ const nutritionTable = document.getElementById("nutrition.table"); // Corrected 
 
 const editHandler = (e) => {
   const pathname = window.location.pathname.split("/");
-  window.location.href = `/admin/recipe/view/edit/${
+  window.location.href = `/admin/recipe/edit/${
     pathname[pathname.length - 1]
   }`;
 };

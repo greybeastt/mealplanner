@@ -14,6 +14,7 @@ router.post("/auth", auth);
 router.get("/recipies", authenticateToken, RecipeController.getAllRecipies);
 
 router.route("/recipe/view/:recipeID").all().get(createview);
+router.route("/recipe/edit/:recipeID").all().get(createEditView);
 
 router
   .route("/recipe/:recipeID")
@@ -21,8 +22,6 @@ router
   .get(RecipeController.getRecipe)
   .post(RecipeController.updateRecipe)
   .delete(RecipeController.deleteRecipe);
-
-router.route("/recipe/view/edit/:recipeID").all().get(createEditView);
 
 router.get("/", (req, res, next) => {
   res.sendFile(path.join(__dirname, "../../public/auth.html"));

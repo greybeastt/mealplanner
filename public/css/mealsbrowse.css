@@ -1,29 +1,20 @@
-body {
+html body {
   background-color: #f9f9f9;
   height: 100vh;
   margin: 0;
   font-family: "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol";
+  max-width: 100%;
 }
 .navbar {
   display: flex; /* Use flexbox for layout */
   justify-content: start; /* Distribute items evenly */
   align-items: center; /* Center items vertically */
-  background-color: #373a40; /* Background color for navbar */
   color: #f9f9f9; /* Text color */
   height: 60px; /* Adjust height as needed */
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); Add shadow */
-  margin-bottom: 5%;
-  padding: 10px;
-  border-bottom: 1px solid black; /* Border style with color */
-}
-
-.navbar {
-  width: 100%;
+  margin-bottom: 4%;
   background-color: #1b1b25;
   padding: 10px 20px;
-  display: flex;
-  justify-content: start;
 }
 
 .navbar-brand img {
@@ -43,7 +34,7 @@ body {
 
 /* Table styling */
 table {
-  width: 100%;
+  width: 90%;
   border-collapse: collapse;
   margin-bottom: 20px;
   font-family: Arial, sans-serif;
@@ -74,8 +65,8 @@ tbody td {
 
 /* Image styling */
 tbody td img {
-  max-width: 100px;
-  max-height: 100px;
+  /* max-width: 100px; */
+  /* max-height: 100px; */
 }
 
 /* Link styling */
