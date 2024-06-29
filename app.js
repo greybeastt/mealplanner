@@ -8,13 +8,17 @@ const logger = require("./src/utils/logger");
 
 const port = process.env.PORT || 3000;
 
-mongoose
-  .connect(config.get("MONGO_URI"), {
-    dbName: "eatthismuch",
-  })
-  .then((result) => {
-    server.listen(port, async () => {
+const power_outage = true;
+power_outage
+  ? server.listen(port, async () => {
       logger.info(">> server started on port:" + port);
-      // console.log((await Recipe.find().limit(1)).join())
-    });
-  });
+    })
+  : mongoose
+      .connect(config.get("MONGO_URI"), {
+        dbName: "eatthismuch",
+      })
+      .then((result) => {
+        server.listen(port, async () => {
+          logger.info(">> server started on port:" + port);
+        });
+      });

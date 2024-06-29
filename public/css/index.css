@@ -67,24 +67,6 @@ select {
   text-align: center;
 }
 
-button {
-  background-color: #f1831d;
-  color: white;
-  padding: 10px 20px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 32%;
-  height: 16%;
-  font-weight: 500;
-  font-size: medium;
-}
-
-button:hover {
-  background-color: #e17a1b;
-}
-
 @media (max-width: 600px) {
   .page-intro {
     width: 80%;
@@ -137,6 +119,15 @@ button:hover {
   padding: 10px;
   min-width: 50%;
   margin: 10px;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.25, 0.54),
+    box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.meal h3{
+  margin: 5px 0px;
+}
+.meal:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .meal-header {
@@ -156,12 +147,23 @@ button:hover {
 }
 
 .meal-item {
+  /* background-color: #ccc; */
+  padding: 5px;
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+justify-content: space-between;
+  /* margin-bottom: 10px; */
   width: 100%;
   z-index: 1;
   position: relative;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.25, 0.54),
+    box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.meal-item:hover {
+  border: 1px solid #df8b3cb9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .meal-item img {
@@ -171,14 +173,15 @@ button:hover {
   margin-right: 10px;
 }
 
-.meal-details h3 {
+.meal-details h4 {
   margin: 0;
-  font-size: 1.2em;
+  font-size: 14px;
 }
 
 .meal-details p {
-  margin: 5px 0 0;
+  margin: 0px 0 0;
   color: #888;
+  font-size: 14px;
 }
 
 .meal-item:hover {
@@ -262,4 +265,47 @@ th {
   flex-direction: row;
   display: flex;
   position: relative;
+}
+
+#loadingSpinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  /* border-left-color: #7983ff; */
+  border-left-color: #f9f9f9;
+  border-radius: 50%;
+  margin: 0;
+  margin-left: 5px;
+  vertical-align: middle;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+button {
+  background-color: #f1831d;
+  text-align: center;
+  color: white;
+  padding: 10px 20px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 40%;
+  height: 20%;
+  font-weight: 500;
+  font-size: large;
+}
+
+button:hover {
+  background-color: #e17a1b;
+}
+
+button:disabled {
+  background-color: #e17a1b;
 }

@@ -5,18 +5,7 @@ const baseUrl = production
 const mealColumn = document.querySelector(".meal-row");
 const modal = document.querySelector(".modal");
 const generateButton = document.getElementById("generateButton");
-
-// Function to show modal
-const showModal = (element) => {
-  modal.classList.add("show");
-  console.log("hi");
-};
-
-// Function to hide modal
-const hideModal = (element) => {
-  modal.classList.remove("show");
-  console.log("bye");
-};
+const loadingSpinner = document.getElementById("loadingSpinner");
 
 const createMealItem = (recipe) => {
   const mealItem = document.createElement("div");
@@ -33,7 +22,7 @@ const createMealItem = (recipe) => {
   mealTitle.textContent = recipe.food_name;
 
   const mealQuantity = document.createElement("p");
-  mealQuantity.textContent = `${recipe.number_servings} Serving`;
+  mealQuantity.textContent = `${recipe.number_servings} serving`;
 
   mealDetails.append(mealTitle, mealQuantity);
   mealItem.append(image, mealDetails);
@@ -78,19 +67,30 @@ const createModal = (recipe) => {
   return modalItem;
 };
 
-const generateBtnHandler = async () => {
-  const calories = document.getElementById("cal_input").value || 1000;
+const toggleLoading = (isLoading) => {
+  generateButton.disabled = isLoading;
+  loadingSpinner.style.display = isLoading ? "inline-block" : "none";
+};
+
+const fetchMealDate = async (numberOfMeals, calories) => {
+  const res = await fetch(`${baseUrl}/api/v1/${numberOfMeals}/${calories}`);
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(errorData.error);
+  }
+  return res.json();
+};
+const generateBtnHandler = async (e) => {
   const numberOfMeals =
     document.getElementById("num_meals_selector").value || 2;
+  const calories = document.getElementById("cal_input").value || 1000;
+
+  toggleLoading(true);
 
   try {
-    const res = await fetch(`${baseUrl}/api/v1/${numberOfMeals}/${calories}`);
-    if (!res.ok) {
-      throw new Error(`Error: ${(await res.json()).error}`);
-    }
-    const data = await res.json();
-    mealColumn.innerHTML = "";
+    const data = await fetchMealDate(numberOfMeals, calories);
 
+    mealColumn.innerHTML = "";
     let chart_calories = 0;
     data.forEach((meal) => {
       const mealContainer = document.createElement("div");
@@ -127,7 +127,6 @@ const generateBtnHandler = async () => {
 
       pTag.innerText = `${Math.round(totalCalories)} Calories`;
       chart_calories += totalCalories;
-      document.getElementById("chart-calories").innerText = "xxx Calories";
       mealColumn.appendChild(mealContainer);
     });
     document.getElementById("chart-calories").innerHTML =
@@ -135,6 +134,8 @@ const generateBtnHandler = async () => {
   } catch (err) {
     throw err;
     alert(`${err.message}`);
+  } finally {
+    toggleLoading(false);
   }
 };
 
