@@ -5,13 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="/css/mealsbrowse.css" />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="navbar">
       <h1>Meal Planner</h1>
+      <a class="btn btn-primary" role="button" href="/createmeal.html"
+        >Create a Recipe</a
+      >
     </div>
-
-    <a class="createBtn" role="button" href="/createmeal.html">Create a Recipe</a>
 
     <div class="row">
       <div class="col-10 search_padding results_view">
@@ -20,5 +25,8 @@
     </div>
     <br />
     <script src="./js/all.recipes.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>

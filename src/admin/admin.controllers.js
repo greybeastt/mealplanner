@@ -21,6 +21,7 @@ exports.auth = (req, res, next) => {
   const token = generateAccessToken({}, "1d");
   return res.json({ message: "Login successful", token: token });
 };
+
 exports.searchFooByName = async (name) => {
   try {
     const regex = new RegExp(name, "i"); // 'i' for case-insensitive search

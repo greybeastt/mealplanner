@@ -3,7 +3,6 @@ const logger = require("../utils/logger");
 
 const paginationLimit = 20;
 module.exports = class RecipeController {
-
   static async getAllRecipies(req, res, next) {
     const { page } = req.query || 1;
     const receipes = await Recipe.find(
@@ -15,6 +14,7 @@ module.exports = class RecipeController {
         fats: 1,
         proteins: 1,
         meal_category: 1,
+        default_image: 1,
         _id: 1,
       }
     )

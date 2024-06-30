@@ -22,61 +22,18 @@ html body {
   margin: 0 auto;
 }
 
-.navbar a:hover {
-  background-color: whitesmoke; /* Darken background on hover */
-}
-
 /* Container for the results */
 .results_view {
   margin: 20px;
   overflow-x: auto; /* Enable horizontal scrolling for small screens */
 }
 
-/* Table styling */
-table {
-  width: 90%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-  font-family: Arial, sans-serif;
-}
-
-thead {
-  background-color: #f2f2f2;
-}
-
-thead th {
-  padding: 10px;
-  border: 1px solid #ddd;
-}
-
-tbody tr {
-  border-bottom: 1px solid #ddd;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-tbody td {
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: center;
-}
-
-/* Image styling */
-tbody td img {
-  /* max-width: 100px; */
-  /* max-height: 100px; */
-}
-
-/* Link styling */
-tbody td a {
-  text-decoration: none;
-  color: #3498db;
-}
-
-tbody td a:hover {
-  text-decoration: underline;
+.table img {
+  max-width: 40%;
+  td,
+  th {
+    vertical-align: middle;
+  }
 }
 
 /* Pagination controls container */
@@ -97,10 +54,11 @@ tbody td a:hover {
   background-color: #3498db;
   color: white;
   border: none;
-  padding: 10px 20px;
+  border-radius: 2px;
+  padding: 8px 8px;
   cursor: pointer;
   font-size: 16px;
-  margin: 0 5px;
+  margin: 0 0;
 }
 
 #next-button:hover,
@@ -120,14 +78,14 @@ tbody td a:hover {
   }
 
   tbody td {
-    display: block; /* Display cells as blocks */
-    text-align: right; /* Align text to the right */
-    padding-left: 50%; /* Create space for the pseudo-element */
+    display: block;
+    text-align: right;
+    padding-left: 50%;
     position: relative;
   }
 
   tbody td::before {
-    content: attr(data-label); /* Display the label for each cell */
+    content: attr(data-label);
     position: absolute;
     left: 0;
     width: 45%;
@@ -151,14 +109,4 @@ tbody td a:hover {
     width: auto;
     box-sizing: border-box;
   }
-}
-.createBtn {
-  margin: 10px;
-  text-decoration: none;
-  background-color: #f5f5f5;
-  border: 2px solid #ccc;
-  padding: 16px 32px;
-  cursor: pointer;
-  border-radius: 15px;
-  user-select: none;
 }

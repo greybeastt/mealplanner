@@ -1,4 +1,6 @@
 const recipeTable = document.createElement("table");
+recipeTable.classList.add("table");
+recipeTable.classList.add("table-bordered");
 recipeTable.id = "reciepeTable";
 const paginationContainer = document.createElement("div");
 paginationContainer.classList.add("pagination-controls");
@@ -8,11 +10,11 @@ paginationNumbers.id = "pagination-numbers";
 
 const nextButton = document.createElement("button");
 nextButton.id = "next-button";
-nextButton.textContent = "Next";
+nextButton.textContent = ">";
 
 const prevButton = document.createElement("button");
 prevButton.id = "prev-button";
-prevButton.textContent = "Previous";
+prevButton.textContent = "<";
 
 paginationContainer.appendChild(prevButton);
 paginationContainer.appendChild(paginationNumbers);
@@ -66,9 +68,9 @@ const fetchdata = async () => {
   nameHead.textContent = "Recipe Name";
   headRow.appendChild(nameHead);
 
-  const caloriesHead = document.createElement("th");
-  caloriesHead.textContent = "Category";
-  headRow.appendChild(caloriesHead);
+  // const caloriesHead = document.createElement("th");
+  // caloriesHead.textContent = "Category";
+  // headRow.appendChild(caloriesHead);
 
   // const caloriesHead = document.createElement("th");
   // caloriesHead.textContent = "Calories";
@@ -93,17 +95,11 @@ const fetchdata = async () => {
     const imageCell = document.createElement("td");
     imageCell.setAttribute("data-label", "Image");
     const image = document.createElement("img");
-    try {
-      if (recipe["images"].length > 0) {
-        image.src =
-          "https://images.eatthismuch.com/" + recipe["images"][0]["thumbnail"];
-      } else {
-        image.src =
-          "https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg";
-      }
-    } catch (err) {
-      console.error(err);
-    }
+    image.classList.add("img-thumbnail");
+    // "https://ionicframework.com/docs/img/demos/thumbnail.svg"
+    console.log(recipe);
+    image.src =
+      "https://images.eatthismuch.com/" + recipe.default_image.thumbnail;
     imageCell.appendChild(image);
     row.appendChild(imageCell);
 
@@ -130,10 +126,10 @@ const fetchdata = async () => {
     // proteinsCell.textContent = Math.round(recipe.proteins * 10) / 10 || 0;
     // row.appendChild(proteinsCell);
 
-    const proteinsCell = document.createElement("td");
-    proteinsCell.setAttribute("data-label", "Proteins");
-    proteinsCell.textContent = recipe.meal_category || "ff";
-    row.appendChild(proteinsCell);
+    // const proteinsCell = document.createElement("td");
+    // proteinsCell.setAttribute("data-label", "Proteins");
+    // proteinsCell.textContent = recipe.meal_category || "ff";
+    // row.appendChild(proteinsCell);
 
     tableBody.appendChild(row);
   });
