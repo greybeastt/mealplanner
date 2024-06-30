@@ -1,7 +1,7 @@
 const createHttpError = require("http-errors");
 const Recipe = require("../model/receipe.model");
 const logger = require("../utils/logger");
-const error_margin = 30;
+const error_margin = 20;
 
 const meal_query = {
   breakfast: { options: { is_breakfast: true, breakfast: true } },
@@ -102,6 +102,8 @@ const getRecipies = async (options, calories, type, order) => {
     second_idx++;
   }
 
+  recipes[first_idx].order = Math.random();
+  recipes[second_idx].order = Math.random();
   select_random.push(recipes[first_idx]);
   select_random.push(recipes[second_idx]);
   logger.info(`${type} ${recipes.length}`);
@@ -143,3 +145,27 @@ exports.generatePlan = [
     }
   },
 ];
+
+exports.regenerateRecipe = async (req, res, next) => {
+  try {
+    const { calories, is_lunch, is_breakfast, is_dinner, is_snack, food_name } =
+      req.body;
+
+    let cals = parseFloat(calories);
+    let options = { is_lunch, is_breakfast, is_dinner, is_snack };
+
+    let recipes = [];
+    while (recipes.length < 2) {
+      recipes = await Recipe.find({
+        calories: { $gt: cals - error_margin, $lt: cals + error_margin },
+        ...options,
+      });
+      cals += 2 * error_margin;
+    }
+
+    const ans = recipes.find((r) => r.food_name !== food_name);
+    res.status(200).json(ans);
+  } catch (err) {
+    next(err);
+  }
+};

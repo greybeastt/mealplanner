@@ -6,8 +6,8 @@ body {
   background-repeat: no-repeat;
   height: 100vh;
   margin: 0;
-  font-family: "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 body::-webkit-scrollbar {
@@ -275,7 +275,7 @@ th {
   display: inline-block;
   width: 16px;
   height: 16px;
-  border: 4px solid rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(0, 0, 0, 0.1);
   /* border-left-color: #7983ff; */
   border-left-color: #f9f9f9;
   border-radius: 50%;
@@ -314,6 +314,9 @@ button:disabled {
   background-color: #e17a1b;
 }
 
+.meal-actions {
+  color: grey;
+}
 .meal-actions svg:hover {
-  color: red;
+  color: #212529;
 }

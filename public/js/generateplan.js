@@ -8,7 +8,7 @@ const modal = document.querySelector(".modal");
 const generateButton = document.getElementById("generateButton");
 const loadingSpinner = document.getElementById("loadingSpinner");
 
-const createMealItem = (recipe) => {
+const createMealItem = (recipe, meal) => {
   const mealItem = document.createElement("div");
   mealItem.classList.add("meal-item");
 
@@ -46,19 +46,25 @@ const createMealItem = (recipe) => {
   svg1.innerHTML = `<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.651 7.65a7.131 7.131 0 0 0-12.68 3.15M18.001 4v4h-4m-7.652 8.35a7.13 7.13 0 0 0 12.68-3.15M6 20v-4h4"/>`;
 
   // Add event listener to the first SVG
-  svg1.addEventListener("click", () => {
-    data = data.map((m) => {
-      m.recipe = m.recipes.map((r) => {
-        if (r.food_name === recipe.food_name) {
-          // TODO: send the meal to the backend to upadate it
-          console.log(r.food_name);
-        }
-        return r;
-      });
-      return m;
-    });
-    // renderMeals(data);
-    console.log("Hella World");
+  svg1.addEventListener("click", async () => {
+    svg1.disabled = true;
+    try {
+      const meal_index = data.findIndex((m) => m.type === meal.type);
+      let idx = meal.recipes.findIndex((r) => r.food_name === recipe.food_name);
+
+      let newRecipe = await changeRecipe(recipe);
+      if (meal.recipes.find((e) => newRecipe.food_name === e.food_name)) {
+        newRecipe = await changeRecipe(meal[(idx + 1) % 2]);
+      }
+      meal.recipes[idx] = newRecipe;
+      data[meal_index] = meal;
+      renderMeals(data);
+    } catch (err) {
+      throw err;
+      console.error("Error updating meals data:", err);
+    } finally {
+      svg1.disabled = false;
+    }
   });
 
   // Create second SVG (dummy)
@@ -120,30 +126,25 @@ const toggleLoading = (isLoading) => {
   loadingSpinner.style.display = isLoading ? "inline-block" : "none";
 };
 
-const fetchMealDate = async (numberOfMeals, calories) => {
-  const res = await fetch(`${baseUrl}/api/v1/${numberOfMeals}/${calories}`);
-  if (!res.ok) {
-    const errorData = await res.json();
-    throw new Error(errorData.error);
-  }
-  return res.json();
-};
-
-const generateBtnHandler = async () => {
-  const calories = document.getElementById("cal_input").value || 1000;
-  const numberOfMeals =
-    document.getElementById("num_meals_selector").value || 2;
-
-  toggleLoading(true);
-
+const changeRecipe = async (recipe) => {
   try {
-    data = await fetchMealData(numberOfMeals, calories);
-    renderMeals(data);
-    updateChartCalories(data);
-  } catch (err) {
-    alert(`Error: ${err.message}`);
-  } finally {
-    toggleLoading(false);
+    const res = await fetch(`${baseUrl}/api/v1/recipe`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(recipe),
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch");
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Error:", error);
+    // Handle error appropriately, e.g., return an error response or rethrow the error
+    throw error;
   }
 };
 
@@ -186,7 +187,7 @@ const createMealContainer = (meal) => {
     const wrapper = document.createElement("div");
     wrapper.classList.add("wrapper");
 
-    const mealItem = createMealItem(recipe);
+    const mealItem = createMealItem(recipe, meal);
     const modal = createModal(recipe);
 
     mealItem.onmouseenter = () => modal.classList.add("show");
@@ -209,6 +210,24 @@ const updateChartCalories = (data) => {
   });
   document.getElementById("chart-calories").innerText =
     Math.round(chart_calories) + " Calories";
+};
+
+const generateBtnHandler = async () => {
+  const calories = document.getElementById("cal_input").value || 1000;
+  const numberOfMeals =
+    document.getElementById("num_meals_selector").value || 2;
+
+  toggleLoading(true);
+
+  try {
+    data = await fetchMealData(numberOfMeals, calories);
+    renderMeals(data);
+    updateChartCalories(data);
+  } catch (err) {
+    alert(`Error: ${err.message}`);
+  } finally {
+    toggleLoading(false);
+  }
 };
 
 generateButton.addEventListener("click", generateBtnHandler);
