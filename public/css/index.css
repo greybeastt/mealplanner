@@ -10,6 +10,9 @@ body {
     "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
 .navbar {
   width: 100%;
   background-color: #1b1b25;
@@ -37,7 +40,7 @@ body {
   align-items: center;
 }
 
-.container {
+.my-container {
   background-color: rgba(255, 255, 255, 1);
   padding: 20px;
   border-radius: 10px;
@@ -108,7 +111,7 @@ select {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: 20px;
+  margin-top: 5px;
   min-width: 60%;
 }
 
@@ -119,11 +122,11 @@ select {
   padding: 10px;
   min-width: 50%;
   margin: 10px;
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.25, 0.54),
-    box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* transition: transform 0.1s cubic-bezier(0.25, 0.46, 0.25, 0.54), */
+  /* box-shadow 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94); */
 }
 
-.meal h3{
+.meal h3 {
   margin: 5px 0px;
 }
 .meal:hover {
@@ -151,15 +154,16 @@ select {
   padding: 5px;
   display: flex;
   align-items: center;
-justify-content: space-between;
+  justify-content: space-between;
   /* margin-bottom: 10px; */
   width: 100%;
   z-index: 1;
   position: relative;
   margin-bottom: 4px;
   border-radius: 8px;
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.25, 0.54),
-    box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.25, 0.54), */
 }
 .meal-item:hover {
   border: 1px solid #df8b3cb9;
@@ -308,4 +312,8 @@ button:hover {
 
 button:disabled {
   background-color: #e17a1b;
+}
+
+.meal-actions svg:hover {
+  color: red;
 }

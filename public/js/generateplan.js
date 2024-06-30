@@ -1,4 +1,5 @@
-let production = true;
+let production = false;
+let data = [];
 const baseUrl = production
   ? "https://mealplanner-86af.onrender.com"
   : "http://localhost:3000";
@@ -10,6 +11,11 @@ const loadingSpinner = document.getElementById("loadingSpinner");
 const createMealItem = (recipe) => {
   const mealItem = document.createElement("div");
   mealItem.classList.add("meal-item");
+
+  const dummyWrapper = document.createElement("div");
+  dummyWrapper.style.display = "flex";
+  dummyWrapper.style.padding = 0;
+  dummyWrapper.style.margin = 0;
 
   const image = document.createElement("img");
   image.src = `https://images.eatthismuch.com/${recipe.default_image.image}`;
@@ -25,7 +31,49 @@ const createMealItem = (recipe) => {
   mealQuantity.textContent = `${recipe.number_servings} serving`;
 
   mealDetails.append(mealTitle, mealQuantity);
-  mealItem.append(image, mealDetails);
+  dummyWrapper.append(image, mealDetails);
+
+  const mealActions = document.createElement("div");
+  mealActions.classList.add("meal-actions");
+  // Create SVG icons
+  const svg1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg1.classList.add("w-6", "h-6", "text-gray-800", "dark:text-white");
+  svg1.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  svg1.setAttribute("width", "24");
+  svg1.setAttribute("height", "24");
+  svg1.setAttribute("fill", "none");
+  svg1.setAttribute("viewBox", "0 0 24 24");
+  svg1.innerHTML = `<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.651 7.65a7.131 7.131 0 0 0-12.68 3.15M18.001 4v4h-4m-7.652 8.35a7.13 7.13 0 0 0 12.68-3.15M6 20v-4h4"/>`;
+
+  // Add event listener to the first SVG
+  svg1.addEventListener("click", () => {
+    data = data.map((m) => {
+      m.recipe = m.recipes.map((r) => {
+        if (r.food_name === recipe.food_name) {
+          // TODO: send the meal to the backend to upadate it
+          console.log(r.food_name);
+        }
+        return r;
+      });
+      return m;
+    });
+    // renderMeals(data);
+    console.log("Hella World");
+  });
+
+  // Create second SVG (dummy)
+  const svg2 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg2.classList.add("w-6", "h-6", "text-gray-800", "dark:text-white");
+  svg2.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+  svg2.setAttribute("width", "24");
+  svg2.setAttribute("height", "24");
+  svg2.setAttribute("fill", "none");
+  svg2.setAttribute("viewBox", "0 0 24 24");
+  svg2.innerHTML = `<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 12h.01m6 0h.01m5.99 0h.01"/>`;
+
+  // Append SVGs to meal actions
+  mealActions.append(svg1, svg2);
+  mealItem.append(dummyWrapper, mealActions);
 
   return mealItem;
 };
@@ -80,63 +128,87 @@ const fetchMealDate = async (numberOfMeals, calories) => {
   }
   return res.json();
 };
-const generateBtnHandler = async (e) => {
+
+const generateBtnHandler = async () => {
+  const calories = document.getElementById("cal_input").value || 1000;
   const numberOfMeals =
     document.getElementById("num_meals_selector").value || 2;
-  const calories = document.getElementById("cal_input").value || 1000;
 
   toggleLoading(true);
 
   try {
-    const data = await fetchMealDate(numberOfMeals, calories);
-
-    mealColumn.innerHTML = "";
-    let chart_calories = 0;
-    data.forEach((meal) => {
-      const mealContainer = document.createElement("div");
-      mealContainer.classList.add("meal");
-
-      const mealHeader = document.createElement("div");
-      mealHeader.classList.add("meal-header");
-
-      const h3Tag = document.createElement("h3");
-      h3Tag.innerText = meal.type;
-
-      const pTag = document.createElement("p");
-
-      mealHeader.append(h3Tag, pTag);
-      mealContainer.appendChild(mealHeader);
-
-      let totalCalories = 0;
-
-      meal.recipes.forEach((recipe) => {
-        totalCalories += recipe.calories;
-
-        const wrapper = document.createElement("div");
-        wrapper.classList.add("wrapper");
-
-        const mealItem = createMealItem(recipe);
-        const modal = createModal(recipe);
-
-        mealItem.onmouseenter = () => modal.classList.add("show");
-        mealItem.onmouseleave = () => modal.classList.remove("show");
-
-        wrapper.append(mealItem, modal);
-        mealContainer.appendChild(wrapper);
-      });
-
-      pTag.innerText = `${Math.round(totalCalories)} Calories`;
-      chart_calories += totalCalories;
-      mealColumn.appendChild(mealContainer);
-    });
-    document.getElementById("chart-calories").innerHTML =
-      Math.round(chart_calories) + " Calories";
+    data = await fetchMealData(numberOfMeals, calories);
+    renderMeals(data);
+    updateChartCalories(data);
   } catch (err) {
-    throw err;
-    alert(`${err.message}`);
+    alert(`Error: ${err.message}`);
   } finally {
     toggleLoading(false);
   }
+};
+
+const fetchMealData = async (numberOfMeals, calories) => {
+  const res = await fetch(`${baseUrl}/api/v1/${numberOfMeals}/${calories}`);
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(errorData.error);
+  }
+  return res.json();
+};
+
+const renderMeals = (data) => {
+  mealColumn.innerHTML = "";
+  data.forEach((meal) => {
+    const mealContainer = createMealContainer(meal);
+    mealColumn.appendChild(mealContainer);
+  });
+};
+
+const createMealContainer = (meal) => {
+  const mealContainer = document.createElement("div");
+  mealContainer.classList.add("meal");
+
+  const mealHeader = document.createElement("div");
+  mealHeader.classList.add("meal-header");
+
+  const h3Tag = document.createElement("h3");
+  h3Tag.innerText = meal.type;
+
+  const pTag = document.createElement("p");
+
+  mealHeader.append(h3Tag, pTag);
+  mealContainer.appendChild(mealHeader);
+
+  let totalCalories = 0;
+  meal.recipes.forEach((recipe) => {
+    totalCalories += recipe.calories;
+
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("wrapper");
+
+    const mealItem = createMealItem(recipe);
+    const modal = createModal(recipe);
+
+    mealItem.onmouseenter = () => modal.classList.add("show");
+    mealItem.onmouseleave = () => modal.classList.remove("show");
+
+    wrapper.append(mealItem, modal);
+    mealContainer.appendChild(wrapper);
+  });
+
+  pTag.innerText = `${Math.round(totalCalories)} Calories`;
+  return mealContainer;
+};
+
+const updateChartCalories = (data) => {
+  let chart_calories = 0;
+  data.forEach((meal) => {
+    meal.recipes.forEach((recipe) => {
+      chart_calories += recipe.calories;
+    });
+  });
+  document.getElementById("chart-calories").innerText =
+    Math.round(chart_calories) + " Calories";
 };
 
 generateButton.addEventListener("click", generateBtnHandler);

@@ -8,7 +8,7 @@ const logger = require("./src/utils/logger");
 
 const port = process.env.PORT || 3000;
 
-const power_outage = true;
+const power_outage = false;
 power_outage
   ? server.listen(port, async () => {
       logger.info(">> server started on port:" + port);
